@@ -64,7 +64,6 @@ in
     helix
     fastfetch
     kitty
-    opencode
     git
     unzip
     python3
