@@ -33,6 +33,7 @@ in
       conf = "sudo nvim ~/.zshrc";
       devshell = "nix-shell --pure";
       rust = "rustc";
+      devnotes = "tjournal";
     };
 
   };
