@@ -5,10 +5,10 @@
 { config, pkgs, ... }:
 
 {
-  imports =
-    [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
-    ];
+  imports = [
+    # Include the results of the hardware scan.
+    ./hardware-configuration.nix
+  ];
 
   # Bootloader.
   boot.loader.grub.enable = true;
@@ -70,12 +70,15 @@
   users.users.bfoster = {
     isNormalUser = true;
     description = "Ben Foster";
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = [
+      "networkmanager"
+      "wheel"
+    ];
     packages = with pkgs; [
-    #  thunderbird
+      #  thunderbird
     ];
   };
-  
+
   # Enable Dynamic Linking
   programs.nix-ld.enable = true;
   # Install firefox.
@@ -86,19 +89,22 @@
   programs.zsh.enable = true;
   users.users.bfoster.shell = pkgs.zsh;
 
-
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
-  wget
-  curl
-  git
-  magic-wormhole
-  zsh
+    vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
+    wget
+    curl
+    git
+    magic-wormhole
+    zsh
+  ];
+  # Install and enable FiraCode Font
+  fonts.packages = with pkgs; [
+    nerd-fonts.fira-code
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
@@ -110,9 +116,12 @@
   # };
 
   # List services that you want to enable:
-  
+
   # Enable Flakes
-  nix.settings.experimental-features = [ "nix-command" "flakes"];
+  nix.settings.experimental-features = [
+    "nix-command"
+    "flakes"
+  ];
 
   # Enable the OpenSSH daemon.
   services.openssh.enable = true;
