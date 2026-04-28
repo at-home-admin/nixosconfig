@@ -68,6 +68,7 @@ in
     unzip
     python3
     go
+    tui-journal
 
   ];
 
