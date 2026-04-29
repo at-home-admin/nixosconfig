@@ -24,7 +24,7 @@
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
   # Configure network proxy if necessary
-  # networking.proxy.default = "http://user:password@proxy:port/";
+  # networking.proxy.default = "http://user:password@proxy:port/"
   # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
 
   # Enable networking
@@ -39,9 +39,26 @@
   # Enable the X11 windowing system.
   services.xserver.enable = true;
 
-  # Enable the XFCE Desktop Environment.
-  services.xserver.displayManager.lightdm.enable = true;
-  services.xserver.desktopManager.xfce.enable = true;
+  # Disable the XFCE Desktop Environment.
+  #services.xserver.displayManager.lightdm.enable = true;
+  #services.xserver.desktopManager.xfce.enable = true;
+
+  # Enable Hyprland DE
+  programs.hyprland.enable = true;
+
+  # Optional: Recommended for Electron apps to use Wayland
+  environment.sessionVariables.NIXOS_OZONE_WL = "1";
+
+  # Enable Tui-Greet As Login Manager
+  services.greetd = {
+    enable = true;
+    settings = {
+      default_session = {
+        command = "${pkgs.greetd.tuigreet}/bin/tuigreet --time --cmd hyprland";
+        user = "greeter";
+      };
+    };
+  };
 
   # Configure keymap in X11
   services.xserver.xkb = {

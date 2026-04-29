@@ -6,6 +6,8 @@ let
     kitty = "kitty";
     nvim = "nvim";
     starship = "starship";
+    hypr = "hypr";
+    waybar = "waybar";
   };
 in
 {
@@ -77,6 +79,8 @@ in
     yazi
     gh
     tea
+    waybar
+    rofi
   ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
