@@ -8,7 +8,7 @@ let
     starship = "starship";
     hypr = "hypr";
     waybar = "waybar";
-    hyprpaper = "hyprpaper";
+    # hyprpaper = "hyprpaper";
   };
 in
 {
@@ -43,14 +43,14 @@ in
   };
   programs.starship.enable = true;
 
-  # # Set Up Hyprpaper
-  # services.hyprpaper = {
-  #   enable = true;
-  #   settings = {
-  #     preload = [ "~/config/configs/user/hyprpaper/Fuji-Dark.png" ];
-  #     wallpaper = [ ",~/config/configs/user/hyprpaper/Fuji-Dark.png" ];
-  #   };
-  # };
+  ## Set Up Hyprpaper
+  #services.hyprpaper = {
+  #  enable = true;
+  #  settings = {
+  #    preload = [ "~/config/configs/user/hyprpaper/Fuji-Dark.png" ];
+  #    wallpaper = [ ",~/config/configs/user/hyprpaper/Fuji-Dark.png" ];
+  #  };
+  #};
 
   programs.zsh.initContent = ''
 
