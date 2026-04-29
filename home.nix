@@ -81,7 +81,7 @@ in
     tea
     waybar
     rofi
-    thunar
+    #thunar
     catfish
     wofi
   ];
