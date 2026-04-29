@@ -35,7 +35,11 @@
 
   # Select internationalisation properties.
   i18n.defaultLocale = "en_CA.UTF-8";
-
+  # Set Boot parameters to stop overwriting on Login Screen
+  boot.kernelParams = [
+    "quiet"
+    "splash"
+  ];
   # Enable the X11 windowing system.
   #  services.xserver.enable = true;
 
@@ -44,7 +48,10 @@
   #services.xserver.desktopManager.xfce.enable = true;
 
   # Enable Hyprland DE
-  programs.hyprland.enable = true;
+  programs.hyprland = {
+    enable = true;
+    withUWSM = true;
+  };
 
   # Optional: Recommended for Electron apps to use Wayland
   environment.sessionVariables.NIXOS_OZONE_WL = "1";
@@ -53,19 +60,14 @@
   services.greetd = {
     enable = true;
     settings = {
+      serviceConfig.Type = "idle";
       default_session = {
-        command = "${pkgs.tuigreet}/bin/tuigreet --time --asterisks --remember --cmd Hyprland";
+        command = "${pkgs.tuigreet}/bin/tuigreet --time --asterisks --cmd Hyprland";
         user = "greeter";
       };
     };
   };
-
-  # Configure keymap in X11
-  services.xserver.xkb = {
-    layout = "us";
-    variant = "";
-  };
-
+  systemd.services.greetd.serviceConfig.Type = "idle";
   # Enable CUPS to print documents.
   services.printing.enable = true;
 

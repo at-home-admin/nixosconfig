@@ -43,6 +43,15 @@ in
   };
   programs.starship.enable = true;
 
+  # # Set Up Hyprpaper
+  # services.hyprpaper = {
+  #   enable = true;
+  #   settings = {
+  #     preload = [ "~/config/configs/user/hyprpaper/Fuji-Dark.png" ];
+  #     wallpaper = [ ",~/config/configs/user/hyprpaper/Fuji-Dark.png" ];
+  #   };
+  # };
+
   programs.zsh.initContent = ''
 
     fastfetch
@@ -85,7 +94,9 @@ in
     #thunar
     wofi
     hyprpaper
+    qutebrowser
   ];
+  wayland.windowManager.hyprland.systemd.enable = false;
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
   # plain files is through 'home.file'.
