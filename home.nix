@@ -34,6 +34,7 @@ in
       devshell = "nix-shell --pure";
       rust = "rustc";
       devnotes = "tjournal";
+      collect = "nix-collect-garbage";
     };
 
   };

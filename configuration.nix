@@ -127,7 +127,7 @@
   nix.gc = {
     automatic = true;
     dates = "weekly";
-    options = "--delete-older-than-15-d";
+    options = "--delete-older-than-7-d";
   };
 
   # Enable Automatic Upgrades and Turn Off Auto Reboot
