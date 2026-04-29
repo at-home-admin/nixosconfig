@@ -42,6 +42,18 @@ in
   };
   programs.starship.enable = true;
 
+  # Install hyprpaper and set background
+  services.hyprpaper = {
+    enable = true;
+    settings = {
+      ipc = "on";
+      splash = false;
+      splash_offset = 2.0;
+      preload = [ "~/config/configs/user/hypr/backgrounds/Fuji-Dark.png" ];
+      wallpaper = [ ",~/config/configs/user/hypr/backgrounds/Fuji-Dark.png" ];
+    };
+  };
+
   programs.zsh.initContent = ''
 
     fastfetch
