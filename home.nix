@@ -81,6 +81,9 @@ in
     tea
     waybar
     rofi
+    thunar
+    catfish
+    wofi
   ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
