@@ -82,7 +82,6 @@ in
     waybar
     rofi
     #thunar
-    catfish
     wofi
   ];
 
