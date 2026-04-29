@@ -95,6 +95,7 @@ in
     wofi
     hyprpaper
     qutebrowser
+    nwg-look
   ];
   wayland.windowManager.hyprland.systemd.enable = false;
 

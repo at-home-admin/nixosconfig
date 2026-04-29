@@ -44,8 +44,8 @@
   #  services.xserver.enable = true;
 
   # Disable the XFCE Desktop Environment.
-  #services.xserver.displayManager.lightdm.enable = true;
-  #services.xserver.desktopManager.xfce.enable = true;
+  services.xserver.displayManager.lightdm.enable = false;
+  services.xserver.desktopManager.xfce.enable = false;
 
   # Enable Hyprland DE
   programs.hyprland = {
