@@ -123,6 +123,7 @@
     git
     magic-wormhole
     zsh
+
   ];
   # Install and enable FiraCode Font
   fonts.packages = with pkgs; [
