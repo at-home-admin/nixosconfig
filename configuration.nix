@@ -37,7 +37,7 @@
   i18n.defaultLocale = "en_CA.UTF-8";
 
   # Enable the X11 windowing system.
-  services.xserver.enable = true;
+  #  services.xserver.enable = true;
 
   # Disable the XFCE Desktop Environment.
   #services.xserver.displayManager.lightdm.enable = true;
@@ -54,7 +54,7 @@
     enable = true;
     settings = {
       default_session = {
-        command = "${pkgs.tuigreet}/bin/tuigreet --time --asterisks --remember --cmd hyprland";
+        command = "${pkgs.tuigreet}/bin/tuigreet --time --asterisks --remember --cmd Hyprland";
         user = "greeter";
       };
     };
