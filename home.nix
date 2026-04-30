@@ -104,6 +104,7 @@ in
     hyprlock
     wdisplays
     dunst
+
   ];
   wayland.windowManager.hyprland.systemd.enable = false;
 
