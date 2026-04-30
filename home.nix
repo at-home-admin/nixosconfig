@@ -104,12 +104,14 @@ in
     #thunar
     wofi
     wpaperd
-    qutebrowser
     nwg-look
     hypridle
     hyprlock
     wdisplays
     dunst
+    pavucontrol
+    lazygit
+
   ];
   wayland.windowManager.hyprland.systemd.enable = false;
 

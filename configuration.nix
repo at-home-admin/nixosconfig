@@ -106,7 +106,7 @@
   # Enable Dynamic Linking
   programs.nix-ld.enable = true;
   # Install firefox.
-  programs.firefox.enable = true;
+  programs.firefox.enable = false;
   # Disable nano
   programs.nano.enable = false;
   # Enable zsh and set it as default for user
