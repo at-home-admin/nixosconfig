@@ -1,4 +1,10 @@
-{ config, pkgs, ... }:
+{
+  config,
+  pkgs,
+  system,
+  inputs,
+  ...
+}:
 let
   dotfiles = "${config.home.homeDirectory}/config/configs/user";
   create_symlink = path: config.lib.file.mkOutOfStoreSymlink path;
@@ -104,7 +110,6 @@ in
     hyprlock
     wdisplays
     dunst
-
   ];
   wayland.windowManager.hyprland.systemd.enable = false;
 
