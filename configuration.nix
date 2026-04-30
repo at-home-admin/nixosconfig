@@ -39,6 +39,11 @@
   boot.kernelParams = [
     "quiet"
     "splash"
+    "intel_iommu=igfx_off"
+    "i915.fastboot=1"
+    "i915.enable_psr=0"
+    "i915.enable_fbc=0"
+    "intel_idle.max_cstate=2"
   ];
   # Enable the X11 windowing system.
   #  services.xserver.enable = true;
