@@ -8,7 +8,6 @@ let
     starship = "starship";
     hypr = "hypr";
     waybar = "waybar";
-    # hyprpaper = "hyprpaper";
   };
 in
 {
@@ -42,7 +41,12 @@ in
 
   };
   programs.starship.enable = true;
-
+  services.wpaperd.enable = true;
+  services.wpaperd.settings = {
+    eDP-1 = {
+      path = "/home/bfoster/config/configs/user/hyprpaper/Fuji-Dark.png";
+    };
+  };
   ## Set Up Hyprpaper
   #services.hyprpaper = {
   #  enable = true;
@@ -93,9 +97,13 @@ in
     rofi
     #thunar
     wofi
-    hyprpaper
+    wpaperd
     qutebrowser
     nwg-look
+    hypridle
+    hyprlock
+    wdisplays
+    dunst
   ];
   wayland.windowManager.hyprland.systemd.enable = false;
 
