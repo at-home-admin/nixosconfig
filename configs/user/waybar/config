@@ -7,7 +7,7 @@
 
     "modules-left": ["hyprland/workspaces", "group/usage"],
     "modules-center": ["clock"],
-    "modules-right": ["custom/pacman", "battery", "wireplumber", "backlight", "network", "bluetooth", "hyprland/language", "tray"],
+    "modules-right": [ "battery", "wireplumber", "backlight", "network", "bluetooth", "hyprland/language", "tray"],
     "custom/pacman": {
       "format": "{icon}{0}",
       "return-type": "json",

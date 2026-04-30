@@ -109,9 +109,9 @@ in
     hyprlock
     wdisplays
     dunst
-    pavucontrol
+    #pavucontrol
     lazygit
-
+    pwvucontrol
   ];
   wayland.windowManager.hyprland.systemd.enable = false;
 
