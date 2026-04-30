@@ -111,7 +111,7 @@ in
     dunst
     #pavucontrol
     lazygit
-    pwvucontrol
+    pavucontrol
   ];
   wayland.windowManager.hyprland.systemd.enable = false;
 
