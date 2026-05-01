@@ -149,7 +149,7 @@
     magic-wormhole
     zsh
     inputs.zen-browser.packages.${pkgs.stdenv.hostPlatform.system}.default
-
+    networkmanagerapplet
   ];
   # Install and enable FiraCode Font
   fonts.packages = with pkgs; [
