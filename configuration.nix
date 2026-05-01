@@ -29,7 +29,8 @@
 
   # Enable networking
   networking.networkmanager.enable = true;
-
+  # Enable nm-applet (installs networkmanagerapplet)
+  programs.nm-applet.enable = true;
   # Set your time zone.
   time.timeZone = "America/Edmonton";
 
@@ -91,12 +92,24 @@
     pulse.enable = true;
     # If you want to use JACK applications, uncomment this
     jack.enable = true;
-
+    wireplumber.enable = true;
     # use the example session manager (no others are packaged yet so this is enabled by default,
     # no need to redefine it in your config for now)
     #media-session.enable = true;
   };
-
+  services.pipewire.wireplumber.extraConfig."10-bluez" = {
+    "monitor.bluez.properties" = {
+      "bluez5.enable-sbc-xq" = true;
+      "bluez5.enable-msbc" = true;
+      "bluez5.enable-hw-volume" = true;
+      "bluez5.roles" = [
+        "hsp_hs"
+        "hsp_ag"
+        "hfp_hf"
+        "hfp_ag"
+      ];
+    };
+  };
   # Enable touchpad support (enabled default in most desktopManager).
   # services.xserver.libinput.enable = true;
 
@@ -136,7 +149,7 @@
     magic-wormhole
     zsh
     inputs.zen-browser.packages.${pkgs.stdenv.hostPlatform.system}.default
-    wireplumber
+
   ];
   # Install and enable FiraCode Font
   fonts.packages = with pkgs; [
