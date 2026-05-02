@@ -107,6 +107,7 @@ in
     pavucontrol
     lazygit
     hyprcursor
+    terraform
   ];
   wayland.windowManager.hyprland.systemd.enable = false;
 
