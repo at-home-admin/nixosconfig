@@ -4,7 +4,7 @@
     nixpkgs.url = "nixpkgs/nixos-25.11";
     zen-browser.url = "github:youwen5/zen-browser-flake";
     zen-browser.inputs.nixpkgs.follows = "nixpkgs";
-    catppuccin.url = "github:catppuccin/nix/release-25.11";
+    nixpkgs-unstable.url = "nixpkgs/nixos-unstable";
     home-manager = {
       url = "github:nix-community/home-manager/release-25.11";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -18,13 +18,23 @@
       nixpkgs,
       home-manager,
       zen-browser,
-      catppuccin,
+      nixpkgs-unstable,
       ...
     }:
+    let
+      system = "x86_64-linux";
+      lib = nixpkgs.lib;
+      pkgs = nixpkgs.legacyPackages.${system};
+      pkgs-unstable = nixpkgs-unstable.legacyPackages.${system};
+    in
     {
+
       nixosConfigurations."EXILE" = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
-        specialArgs = { inherit inputs; };
+        inherit system;
+        specialArgs = {
+          inherit inputs;
+          inherit pkgs-unstable;
+        };
         modules = [
           ./configuration.nix
           home-manager.nixosModules.home-manager
@@ -37,7 +47,8 @@
             };
             home-manager.extraSpecialArgs = {
               inherit inputs;
-              system = "x86_64-linux";
+              inherit system;
+              inherit pkgs-unstable;
 
             };
           }

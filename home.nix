@@ -3,7 +3,7 @@
   pkgs,
   system,
   inputs,
-  catppuccin,
+  pkgs-unstable,
   ...
 }:
 
@@ -74,51 +74,58 @@ in
   '';
   # The home.packages option allows you to install Nix packages into your
   # environment.
-  home.packages = with pkgs; [
-    neovim
-    ripgrep
-    nil
-    nh
-    nixpkgs-fmt
-    nodejs
-    gcc
-    cargo
-    wl-clipboard
-    starship
-    zoxide
-    tmux
-    nixfmt
-    television
-    bat
-    fd
-    fish
-    statix
-    helix
-    fastfetch
-    kitty
-    git
-    unzip
-    python3
-    go
-    tui-journal
-    yazi
-    gh
-    tea
-    waybar
-    rofi
-    #thunar
-    wofi
-    wpaperd
-    nwg-look
-    hypridle
-    hyprlock
-    wdisplays
-    dunst
-    pavucontrol
-    lazygit
-    hyprcursor
-    terraform
-  ];
+  home.packages =
+    (with pkgs; [
+      neovim
+      ripgrep
+      nil
+      #nh
+      nixpkgs-fmt
+      nodejs
+      gcc
+      cargo
+      wl-clipboard
+      starship
+      zoxide
+      tmux
+      nixfmt
+      television
+      bat
+      fd
+      fish
+      statix
+      helix
+      fastfetch
+      kitty
+      git
+      unzip
+      python3
+      go
+      tui-journal
+      yazi
+      gh
+      tea
+      waybar
+      rofi
+      #thunar
+      wofi
+      wpaperd
+      nwg-look
+      hypridle
+      hyprlock
+      wdisplays
+      dunst
+      pavucontrol
+      lazygit
+      hyprcursor
+      terraform
+    ])
+
+    ++
+
+      (with pkgs-unstable; [
+        nh
+      ]);
   wayland.windowManager.hyprland.systemd.enable = false;
 
   # Install Cursor Theme
