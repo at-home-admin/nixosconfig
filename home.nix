@@ -34,6 +34,15 @@ in
     };
   };
 
+  programs.yazi = {
+    enable = true;
+    settings = {
+      manager = {
+        show_hidden = true;
+        sort_by = "mtime";
+      };
+    };
+  };
   programs.zsh = {
     enable = true;
     shellAliases = {
