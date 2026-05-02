@@ -119,6 +119,7 @@ in
       lazygit
       hyprcursor
       terraform
+      tealdeer
     ])
 
     ++
