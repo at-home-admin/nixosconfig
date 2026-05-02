@@ -1,5 +1,5 @@
 {
-  description = "IDUNN Nix Configuration";
+  description = "Desktop Nix Configuration";
   inputs = {
     nixpkgs.url = "nixpkgs/nixos-25.11";
     zen-browser.url = "github:youwen5/zen-browser-flake";
