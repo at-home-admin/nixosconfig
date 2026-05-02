@@ -16,6 +16,7 @@ let
     starship = "starship";
     hypr = "hypr";
     waybar = "waybar";
+    television = "television";
   };
 in
 {
