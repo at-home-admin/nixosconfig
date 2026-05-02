@@ -3,8 +3,10 @@
   pkgs,
   system,
   inputs,
+  catppuccin,
   ...
 }:
+
 let
   dotfiles = "${config.home.homeDirectory}/config/configs/user";
   create_symlink = path: config.lib.file.mkOutOfStoreSymlink path;
@@ -54,14 +56,6 @@ in
       path = "/home/bfoster/config/configs/user/hyprpaper/Fuji-Dark.png";
     };
   };
-  ## Set Up Hyprpaper
-  #services.hyprpaper = {
-  #  enable = true;
-  #  settings = {
-  #    preload = [ "~/config/configs/user/hyprpaper/Fuji-Dark.png" ];
-  #    wallpaper = [ ",~/config/configs/user/hyprpaper/Fuji-Dark.png" ];
-  #  };
-  #};
 
   programs.zsh.initContent = ''
 
@@ -112,9 +106,18 @@ in
     dunst
     pavucontrol
     lazygit
+    hyprcursor
   ];
   wayland.windowManager.hyprland.systemd.enable = false;
 
+  # Install Cursor Theme
+  home.pointerCursor = {
+    gtk.enable = true;
+    x11.enable = true;
+    package = pkgs.rose-pine-hyprcursor;
+    name = "Rose-Pine-Hyprcursor";
+    size = 16;
+  };
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
   # plain files is through 'home.file'.
   home.file = {

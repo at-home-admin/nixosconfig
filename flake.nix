@@ -4,6 +4,7 @@
     nixpkgs.url = "nixpkgs/nixos-25.11";
     zen-browser.url = "github:youwen5/zen-browser-flake";
     zen-browser.inputs.nixpkgs.follows = "nixpkgs";
+    catppuccin.url = "github:catppuccin/nix/release-25.11";
     home-manager = {
       url = "github:nix-community/home-manager/release-25.11";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -17,6 +18,7 @@
       nixpkgs,
       home-manager,
       zen-browser,
+      catppuccin,
       ...
     }:
     {
@@ -36,8 +38,10 @@
             home-manager.extraSpecialArgs = {
               inherit inputs;
               system = "x86_64-linux";
+
             };
           }
+
         ];
       };
     };
