@@ -43,6 +43,7 @@ in
       rust = "rustc";
       devnotes = "tjournal";
       collect = "nix-collect-garbage";
+      hearthstone = "cd ~/Projects/Hearthstone";
     };
 
   };
