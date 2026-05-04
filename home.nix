@@ -45,6 +45,9 @@ in
   };
   programs.zsh = {
     enable = true;
+    enableCompletion = true;
+    autosuggestion.enable = true; # Note: singular "autosuggestion" in Home Manager
+    syntaxHighlighting.enable = true;
     shellAliases = {
       zreload = "source /home/bfoster/.zshrc";
       #breload = "source /home/bfoster/.bashrc";
