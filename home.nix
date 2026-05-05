@@ -127,6 +127,7 @@ in
       tealdeer
       pgcli
       usql
+      discord
     ])
 
     ++
