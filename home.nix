@@ -59,6 +59,8 @@ in
       devnotes = "tjournal";
       collect = "nix-collect-garbage";
       hearthstone = "cd ~/Projects/Hearthstone";
+      storbage = "nix-store --gc";
+      garbage = "nix-collect-garbage -d";
     };
 
   };
@@ -123,6 +125,8 @@ in
       hyprcursor
       terraform
       tealdeer
+      pgcli
+      usql
     ])
 
     ++
