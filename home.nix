@@ -127,6 +127,9 @@ in
       pgcli
       usql
       discord
+      age
+      atac
+      lazyssh
     ])
 
     ++
