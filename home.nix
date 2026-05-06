@@ -62,7 +62,6 @@ in
       storbage = "nix-store --gc";
       garbage = "nix-collect-garbage -d";
     };
-
   };
   programs.starship.enable = true;
   services.wpaperd.enable = true;
