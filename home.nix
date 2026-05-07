@@ -17,6 +17,7 @@ let
     hypr = "hypr";
     waybar = "waybar";
     television = "television";
+    fastfetch = "fastfetch";
   };
 in
 {
