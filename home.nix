@@ -61,6 +61,7 @@ in
       hearthstone = "cd ~/Projects/Hearthstone";
       storbage = "nix-store --gc";
       garbage = "nix-collect-garbage -d";
+      python = "python3";
     };
   };
   programs.starship.enable = true;
