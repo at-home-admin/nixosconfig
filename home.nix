@@ -63,6 +63,10 @@ in
       storbage = "nix-store --gc";
       garbage = "nix-collect-garbage -d";
       python = "python3";
+      launcher = "cd ~/Projects/goprojects/project-launcher";
+      cordbot = "cd ~/Projects/Python/cordbot";
+      gocordbot = "cd ~/Projects/goprojects/gocordbot";
+      inventory = "cd ~/Projects/goprojects/go-inv";
     };
   };
   programs.starship.enable = true;
