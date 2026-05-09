@@ -136,6 +136,7 @@ in
       age
       atac
       lazyssh
+      gotify-cli
     ])
 
     ++
