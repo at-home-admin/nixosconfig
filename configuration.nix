@@ -113,6 +113,9 @@
   # Enable touchpad support (enabled default in most desktopManager).
   # services.xserver.libinput.enable = true;
 
+  # Enable docker
+  virtualisation.docker.enable = true;
+
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.bfoster = {
     isNormalUser = true;
@@ -120,6 +123,7 @@
     extraGroups = [
       "networkmanager"
       "wheel"
+      "docker"
     ];
     packages = with pkgs; [
       #  thunderbird
@@ -150,6 +154,7 @@
     zsh
     inputs.zen-browser.packages.${pkgs.stdenv.hostPlatform.system}.default
     networkmanagerapplet
+    lazydocker
   ];
   # Install and enable FiraCode Font
   fonts.packages = with pkgs; [
