@@ -179,6 +179,7 @@
     options = "--delete-older-than-7-d";
   };
 
+  nix.optimise.automatic = true; # Optimise storage
   # Enable Automatic Upgrades and Turn Off Auto Reboot
   system.autoUpgrade = {
     enable = true;
