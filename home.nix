@@ -188,7 +188,7 @@ in
   home.sessionVariables = {
     EDITOR = "neovim";
   };
-
+  services.ssh-agent.enable = true;
   # Let Home Manager install and manage itself.
 
   xdg.configFile = builtins.mapAttrs (name: subpath: {
