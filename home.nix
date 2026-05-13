@@ -137,6 +137,7 @@ in
       atac
       lazyssh
       gotify-cli
+      lazysql
     ])
 
     ++
