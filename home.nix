@@ -86,7 +86,6 @@ in
   # environment.
   home.packages =
     (with pkgs; [
-      neovim
       ripgrep
       nil
       #nh
@@ -146,6 +145,7 @@ in
       (with pkgs-unstable; [
         nh
         warp-terminal
+        neovim
       ]);
 
   wayland.windowManager.hyprland.systemd.enable = false;
@@ -190,7 +190,7 @@ in
   #  /etc/profiles/per-user/bfoster/etc/profile.d/hm-session-vars.sh
   #
   home.sessionVariables = {
-    EDITOR = "neovim";
+    EDITOR = "nvim";
   };
   services.ssh-agent.enable = true;
   # Let Home Manager install and manage itself.
