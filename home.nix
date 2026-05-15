@@ -148,8 +148,6 @@ in
         warp-terminal
       ]);
 
-  nixpkgs-unstable.config.allowUnfree = true;
-
   wayland.windowManager.hyprland.systemd.enable = false;
 
   # Install Cursor Theme
