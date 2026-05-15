@@ -138,7 +138,6 @@ in
       lazyssh
       gotify-cli
       lazysql
-      warp-terminal
       nushell
     ])
 
@@ -146,7 +145,11 @@ in
 
       (with pkgs-unstable; [
         nh
+        warp-terminal
       ]);
+
+  nixpkgs-unstable.config.allowUnfree = true;
+
   wayland.windowManager.hyprland.systemd.enable = false;
 
   # Install Cursor Theme
