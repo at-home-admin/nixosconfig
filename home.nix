@@ -138,7 +138,7 @@ in
       lazyssh
       gotify-cli
       lazysql
-      unstable.waveterm
+      warp-terminal
       nushell
     ])
 
