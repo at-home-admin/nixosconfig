@@ -1,0 +1,4 @@
+config:
+  MD013: false # Disable line length rule
+  MD033: false # Allow inline HTML
+  MD041: true # Enforce first line to be a top-level heading
