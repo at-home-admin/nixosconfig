@@ -67,6 +67,7 @@ in
       cordbot = "cd ~/Projects/Python/cordbot";
       gocordbot = "cd ~/Projects/goprojects/gocordbot";
       inventory = "cd ~/Projects/goprojects/go-inv";
+      z = "zoxide";
     };
   };
   programs.starship.enable = true;
