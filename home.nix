@@ -70,6 +70,14 @@ in
       z = "zoxide";
     };
   };
+
+  programs.zoxide = {
+    enable = true;
+    enableZshIntegration = true; # Enabled by default
+    options = [
+      "--cmd cd" # Optional: replaces 'cd' with 'z'
+    ];
+  };
   programs.starship.enable = true;
   services.wpaperd.enable = true;
   services.wpaperd.settings = {
@@ -96,7 +104,6 @@ in
       cargo
       wl-clipboard
       starship
-      zoxide
       tmux
       nixfmt
       television
