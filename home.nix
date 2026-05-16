@@ -138,6 +138,7 @@ in
       gotify-cli
       lazysql
       nushell
+      atuin
     ])
 
     ++
