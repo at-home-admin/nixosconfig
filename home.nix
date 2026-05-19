@@ -155,6 +155,7 @@ in
         nh
         warp-terminal
         neovim
+        screenkey
       ]);
 
   wayland.windowManager.hyprland.systemd.enable = false;
