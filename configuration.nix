@@ -179,7 +179,14 @@
     dates = "weekly";
     options = "--delete-older-than-7-d";
   };
-
+  # Delay the GC service until after the system is fully booted and online
+  systemd.services.nix-gc = {
+    after = [
+      "network.target"
+      "time-sync.target"
+    ];
+    requires = [ "network.target" ];
+  };
   nix.optimise.automatic = true; # Optimise storage
   # Enable Automatic Upgrades and Turn Off Auto Reboot
   system.autoUpgrade = {
