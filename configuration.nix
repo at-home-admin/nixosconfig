@@ -125,11 +125,24 @@
       "networkmanager"
       "wheel"
       "docker"
+      "input"
     ];
     packages = with pkgs; [
       #  thunderbird
     ];
   };
+
+  # Enable users in group wheel to run pkexec without entering sudo password
+
+  security.polkit.extraConfig = ''
+    polkit.addRule(function(action, subject) {
+      if (action.id == "org.freedesktop.policykit.exec" &&
+          action.lookup("program") == "/nix/store/.../bin/showmethekey-cli" &&
+          subject.isInGroup("wheel")) {
+        return polkit.Result.YES;
+      }
+    });
+  '';
 
   # Enable Dynamic Linking
   programs.nix-ld.enable = true;
