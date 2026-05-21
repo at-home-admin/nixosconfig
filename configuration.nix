@@ -156,6 +156,7 @@
     inputs.zen-browser.packages.${pkgs.stdenv.hostPlatform.system}.default
     networkmanagerapplet
     lazydocker
+    hyprpolkitagent
   ];
   # Install and enable FiraCode Font
   fonts.packages = with pkgs; [
