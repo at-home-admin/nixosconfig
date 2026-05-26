@@ -147,6 +147,10 @@ in
       lazysql
       nushell
       atuin
+      # waypaper
+      # hypridle
+      # hyprlock
+      # hyprshot
     ])
 
     ++
