@@ -18,6 +18,7 @@ let
     waybar = "waybar";
     television = "television";
     fastfetch = "fastfetch";
+    #yazi = "yazi";
   };
 in
 {
@@ -120,7 +121,7 @@ in
       python3
       go
       tui-journal
-      yazi
+      # yazi
       gh
       tea
       waybar
