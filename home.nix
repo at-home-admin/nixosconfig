@@ -68,6 +68,7 @@ in
       gocordbot = "cd ~/Projects/goprojects/gocordbot";
       inventory = "cd ~/Projects/goprojects/go-inv";
       z = "zoxide";
+      rebuildstore = "sudo nix-store --verify --check-contents --repair";
     };
   };
 
@@ -147,10 +148,10 @@ in
       lazysql
       nushell
       atuin
-      # waypaper
-      # hypridle
-      # hyprlock
-      # hyprshot
+      waypaper
+      hypridle
+      hyprlock
+      hyprshot
     ])
 
     ++

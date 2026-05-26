@@ -146,6 +146,17 @@
 
   # Enable Dynamic Linking
   programs.nix-ld.enable = true;
+  programs.nix-ld.libraries = with pkgs; [
+    stdenv.cc.cc
+    zlib
+    fuse3
+    icu
+    nss
+    openssl
+    curl
+    expat
+    # Add the specific missing library here
+  ];
   # Install firefox.
   programs.firefox.enable = false;
   # Disable nano
@@ -170,6 +181,7 @@
     networkmanagerapplet
     lazydocker
     hyprpolkitagent
+    zlib
   ];
   # Install and enable FiraCode Font
   fonts.packages = with pkgs; [
