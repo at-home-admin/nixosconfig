@@ -18,7 +18,7 @@ let
     waybar = "waybar";
     television = "television";
     fastfetch = "fastfetch";
-    #yazi = "yazi";
+    # yazi = "yazi";
   };
 in
 {
@@ -91,6 +91,7 @@ in
   programs.zsh.initContent = ''
 
     fastfetch
+    export YAZI_CONFIG_HOME="$HOME/config/configs/user/yazi"
 
   '';
   # The home.packages option allows you to install Nix packages into your
@@ -121,7 +122,7 @@ in
       python3
       go
       tui-journal
-      # yazi
+      yazi
       gh
       tea
       waybar
@@ -207,6 +208,7 @@ in
   #
   home.sessionVariables = {
     EDITOR = "nvim";
+
   };
   services.ssh-agent.enable = true;
   # Let Home Manager install and manage itself.
