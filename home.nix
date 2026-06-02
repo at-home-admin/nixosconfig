@@ -154,6 +154,7 @@ in
       hypridle
       hyprlock
       hyprshot
+      pandoc
     ])
 
     ++
