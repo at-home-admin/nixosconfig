@@ -24,7 +24,7 @@ in
 {
   home.username = "bfoster";
   home.homeDirectory = "/home/bfoster";
-  home.stateVersion = "25.11"; # Please read the comment before changing.
+  home.stateVersion = "26.05"; # Please read the comment before changing.
   programs.git = {
     enable = true;
     settings = {
