@@ -75,7 +75,7 @@
     settings = {
       serviceConfig.Type = "idle";
       default_session = {
-        command = "${pkgs.tuigreet}/bin/tuigreet --time --asterisks --cmd Hyprland";
+        command = "${pkgs.tuigreet}/bin/tuigreet --time --asterisks --cmd start-hyprland";
         user = "greeter";
       };
     };
