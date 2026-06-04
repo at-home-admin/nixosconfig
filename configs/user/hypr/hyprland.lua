@@ -181,29 +181,28 @@ hl.bind(mainMod .. " + SHIFT + H", hl.dsp.window.move({ direction = "l" }))
 hl.bind(mainMod .. " + SHIFT + right", hl.dsp.window.move({ direction = "r" }))
 hl.bind(mainMod .. " + SHIFT + L", hl.dsp.window.move({ direction = "r" }))
 
-hl.layerrule({
-	"blur",
-	"match:namespace wofi",
+hl.layer_rule({
+	match = { namespace = "wofi" },
+	blur = true,
 })
 
-hl.layerrule({
-	"blur",
-	"match:namespace thunar",
+hl.layer_rule({
+	match = { namespace = "thunar" },
+	blur = true,
+})
+hl.layer_rule({
+	match = { namespace = "gedit" },
+	blur = true,
 })
 
-hl.layerrule({
-	"blur",
-	"match:namespace gedit",
+hl.layer_rule({
+	match = { namespace = "gtk-layer-shell" },
+	blur = true,
 })
 
-hl.layerrule({
-	"blur",
-	"match:namespace gtk-layer-shell",
-})
-
-hl.layerrule({
-	"blur",
-	"match:namespace catfish",
+hl.layer_rule({
+	match = { namespace = "catfish" },
+	blur = true,
 })
 
 hl.window_rule({
@@ -254,7 +253,7 @@ hl.config({
 		follow_mouse = 1,
 		touchpad = {
 			natural_scroll = true,
-			["tap-to-click"] = true,
+			tap = enabled,
 			disable_while_typing = true,
 		},
 		sensitivity = 0, -- -1.0 - 1.0, 0 means no modification.
@@ -268,7 +267,6 @@ hl.config({
 			active_border = { colors = { "rgba(33ccffee)", "rgba(8f00ffee)" }, angle = 45 },
 			inactive_border = "rgba(595959aa)",
 		},
-		layout = "dwindle",
 	},
 	--decoration {
 	-- See https://wiki.hyprland.org/Configuring/Variables/ for more
@@ -286,11 +284,6 @@ hl.config({
 	animations = {
 		enabled = true,
 		-- Some default animations, see https://wiki.hyprland.org/Configuring/Animations/ for more
-	},
-	dwindle = {
-		-- See https://wiki.hyprland.org/Configuring/Dwindle-Layout/ for more
-		pseudotile = true, -- master switch for pseudotiling. Enabling is bound to mainMod + P in the keybinds section below
-		preserve_split = true, -- you probably want this
 	},
 	--master {
 	-- See https://wiki.hyprland.org/Configuring/Master-Layout/ for more
