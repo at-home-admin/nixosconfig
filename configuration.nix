@@ -158,7 +158,7 @@
     expat
     # Add the specific missing library here
   ];
-  # Install firefox.
+  # Disable firefox to use zen browser instead.
   programs.firefox.enable = false;
   # Disable nano
   programs.nano.enable = false;
@@ -183,6 +183,7 @@
     lazydocker
     hyprpolkitagent
     zlib
+    ov
   ];
   # Install and enable FiraCode Font
   fonts.packages = with pkgs; [
@@ -232,6 +233,6 @@
   # Or disable the firewall altogether.
   # networking.firewall.enable = false;
 
-  system.stateVersion = "25.11";
+  system.stateVersion = "26.05";
 
 }
