@@ -89,7 +89,6 @@ in
       path = "/home/bfoster/config/configs/user/hyprpaper/Fuji-Dark.png";
     };
   };
-
   programs.zsh.initContent = ''
 
     fastfetch
@@ -157,7 +156,6 @@ in
       hyprlock
       hyprshot
       pandoc
-      python313Packages.pip
     ])
 
     ++
