@@ -10,6 +10,7 @@
 let
   dotfiles = "${config.home.homeDirectory}/config/configs/user";
   create_symlink = path: config.lib.file.mkOutOfStoreSymlink path;
+  vars = import ./variables.nix;
   configs = {
     kitty = "kitty";
     nvim = "nvim";
