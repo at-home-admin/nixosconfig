@@ -156,6 +156,7 @@ in
       hyprlock
       hyprshot
       pandoc
+      uvx
     ])
 
     ++
