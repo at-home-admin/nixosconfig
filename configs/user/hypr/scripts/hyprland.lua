@@ -1,5 +1,5 @@
--- Hyprland Lua Configuration
--- Targets Hyprland v0.55+
+-- hl Lua Configuration
+-- Targets hl v0.55+
 
 -- =========================================================================
 -- Variables & Programs
@@ -22,7 +22,7 @@ hl.monitor({
 -- =========================================================================
 -- Auto-Start (exec-once)
 -- =========================================================================
-hyprland["exec-once"] = {
+hl["exec-once"] = {
 	"wpaperd &",
 	"systemctl --user start hyprpolkitagent",
 	"nm-applet --indicator &",
@@ -31,13 +31,13 @@ hyprland["exec-once"] = {
 	"exec xrdb -load ~/.Xresources",
 	"wl-paste --type text --watch cliphist store",
 	"wl-paste --type image --watch cliphist store",
-	".config/hypr/exec-hyprland",
+	".config/hypr/exec-hl",
 }
 
 -- =========================================================================
 -- General Configuration Blocks
 -- =========================================================================
-hyprland.input = {
+hl.input = {
 	kb_layout = "us",
 	kb_variant = "",
 	kb_model = "",
@@ -54,7 +54,7 @@ hyprland.input = {
 	},
 }
 
-hyprland.general = {
+hl.general = {
 	gaps_in = 5,
 	gaps_out = 10,
 	border_size = 2,
@@ -63,7 +63,7 @@ hyprland.general = {
 	layout = "dwindle",
 }
 
-hyprland.animations = {
+hl.animations = {
 	enabled = true,
 	bezier = {
 		"myBezier, 0.05, 0.9, 0.1, 1.05",
@@ -77,24 +77,24 @@ hyprland.animations = {
 	},
 }
 
-hyprland.dwindle = {
+hl.dwindle = {
 	pseudotile = true,
 	preserve_split = true,
 }
 
-hyprland.misc = {
-	disable_hyprland_logo = false,
+hl.misc = {
+	disable_hl_logo = false,
 }
 
 -- =========================================================================
 -- Layer Rules & Blur
 -- =========================================================================
-hyprland.layerrule = {
+hl.layerrule = {
 	"blur, waybar",
 	"ignorezero, waybar",
 }
 
-hyprland.blurls = {
+hl.blurls = {
 	"wofi",
 	"thunar",
 	"gedit",
@@ -105,7 +105,7 @@ hyprland.blurls = {
 -- =========================================================================
 -- Window Rules (v2)
 -- =========================================================================
-hyprland.windowrulev2 = {
+hl.windowrulev2 = {
 	"opacity 0.85 0.85, floating:1",
 	"float, class:^(one.alynx.showmethekey)$",
 	"float, class:^(showmethekey-gtk)$",
@@ -118,7 +118,7 @@ hyprland.windowrulev2 = {
 -- =========================================================================
 -- Keybindings (Binds)
 -- =========================================================================
-hyprland.bind = {
+hl.bind = {
 	-- Core System Shortcuts
 	mainMod .. ", return, exec, " .. terminal,
 	mainMod .. " SHIFT, R, exec, hyprctl reload",
@@ -183,19 +183,19 @@ hyprland.bind = {
 
 -- Workspace Switch Loops (1 to 10)
 for i = 1, 9 do
-	table.insert(hyprland.bind, mainMod .. ", " .. i .. ", workspace, " .. i)
-	table.insert(hyprland.bind, "ALT SHIFT, " .. i .. ", movetoworkspace, " .. i)
-	table.insert(hyprland.bind, mainMod .. " SHIFT, " .. i .. ", movetoworkspacesilent, " .. i)
+	table.insert(hl.bind, mainMod .. ", " .. i .. ", workspace, " .. i)
+	table.insert(hl.bind, "ALT SHIFT, " .. i .. ", movetoworkspace, " .. i)
+	table.insert(hl.bind, mainMod .. " SHIFT, " .. i .. ", movetoworkspacesilent, " .. i)
 end
 -- Handle 0 mapping to Workspace 10
-table.insert(hyprland.bind, mainMod .. ", 0, workspace, 10")
-table.insert(hyprland.bind, "ALT SHIFT, 0, movetoworkspace, 10")
-table.insert(hyprland.bind, mainMod .. " SHIFT, 0, movetoworkspacesilent, 10")
+table.insert(hl.bind, mainMod .. ", 0, workspace, 10")
+table.insert(hl.bind, "ALT SHIFT, 0, movetoworkspace, 10")
+table.insert(hl.bind, mainMod .. " SHIFT, 0, movetoworkspacesilent, 10")
 
 -- =========================================================================
 -- Mouse Bindings (bindm)
 -- =========================================================================
-hyprland.bindm = {
+hl.bindm = {
 	mainMod .. ", mouse:272, movewindow",
 	mainMod .. ", mouse:273, resizewindow",
 }
@@ -204,9 +204,9 @@ hyprland.bindm = {
 -- Submaps (Resize Mode)
 -- =========================================================================
 -- Trigger entering the resize submap
-table.insert(hyprland.bind, mainMod .. ", R, submap, resize")
+table.insert(hl.bind, mainMod .. ", R, submap, resize")
 
-hyprland.submap = {
+hl.submap = {
 	resize = {
 		binde = {
 			", right, resizeactive, 50 0",
