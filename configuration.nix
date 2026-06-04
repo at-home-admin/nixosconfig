@@ -14,7 +14,7 @@
   imports = [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
-    ./variables.nix
+    # ./variables.nix
   ];
 
   # Bootloader.

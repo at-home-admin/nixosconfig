@@ -157,6 +157,7 @@ in
       hyprlock
       hyprshot
       pandoc
+      python313Packages.pip
     ])
 
     ++
