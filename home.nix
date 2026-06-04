@@ -70,6 +70,7 @@ in
       inventory = "cd ~/Projects/goprojects/go-inv";
       z = "zoxide";
       rebuildstore = "sudo nix-store --verify --check-contents --repair";
+
     };
   };
 
