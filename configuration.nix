@@ -205,7 +205,7 @@
   nix.gc = {
     automatic = true;
     dates = "weekly";
-    options = "--delete-older-than-7-d";
+    options = "--delete-older-than-7d";
   };
   # Delay the GC service until after the system is fully booted and online
   systemd.services.nix-gc = {
@@ -219,14 +219,14 @@
   # Enable Automatic Upgrades and Turn Off Auto Reboot
   system.autoUpgrade = {
     enable = true;
-    flake = inputs.self.outPath;
-    flags = [
-      "-L" # print build logs
-    ];
+    flake = "/home/bfoster/config/"; # Path to your configuration directory
     dates = "02:00";
-    randomizedDelaySec = "45min";
+    operation = "switch";
+    flags = [
+      "--print-build-logs"
+      "--commit-lock-file" # Automatically saves your updated flake.lock
+    ];
   };
-
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];
   # networking.firewall.allowedUDPPorts = [ ... ];
