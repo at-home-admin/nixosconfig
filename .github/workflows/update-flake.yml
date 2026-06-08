@@ -1,0 +1,23 @@
+name: Update Flake Lockfile
+on:
+  schedule:
+    - cron: "0 0 * * 1" # Runs every Monday at midnight
+  workflow_dispatch: # Allows manual trigger from the GitHub web UI
+
+jobs:
+  update-lockfile:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install Nix
+        uses: cachix/install-nix-action@v25
+
+      - name: Update flake.lock
+        run: nix flake update
+
+      - name: Commit and Push changes
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "YARARA BUILD - automated flake update"
