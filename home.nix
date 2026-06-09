@@ -157,7 +157,7 @@ in
       hyprshot
       pandoc
       sqlite
-      postgressql
+      postgresql
     ])
 
     ++
