@@ -158,6 +158,7 @@ in
       pandoc
       sqlite
       postgresql
+      sqlitebrowser
     ])
 
     ++

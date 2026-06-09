@@ -221,19 +221,13 @@
     enable = true;
     flake = "github:at-home-admin/nixos-config/main"; # Path to your configuration directory
     dates = "02:00";
+    randomizedDelaySec = "15min";
     operation = "switch";
+    persistent = true;
     flags = [
       "--print-build-logs"
       "--commit-lock-file" # Automatically saves your updated flake.lock
     ];
-  };
-
-  # Force the auto-upgrade timer to catch up if the laptop was off
-  systemd.timers.nixos-upgrade.timerConfig = {
-    Persistent = true;
-    # Optional: Adds a 15-minute random delay after boot so your laptop
-    # doesn't immediately bog down its internet connection while you log in
-    RandomizedDelaySec = "15m";
   };
 
   # Add the post-stop trigger to send the push notification
