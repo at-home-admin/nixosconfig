@@ -219,7 +219,7 @@
   # Enable Automatic Upgrades and Turn Off Auto Reboot
   system.autoUpgrade = {
     enable = true;
-    flake = "/home/bfoster/config/"; # Path to your configuration directory
+    flake = "github:at-home-admin/nixos-config/main"; # Path to your configuration directory
     dates = "02:00";
     operation = "switch";
     flags = [
@@ -227,6 +227,45 @@
       "--commit-lock-file" # Automatically saves your updated flake.lock
     ];
   };
+
+  # Force the auto-upgrade timer to catch up if the laptop was off
+  systemd.timers.nixos-upgrade.timerConfig = {
+    Persistent = true;
+    # Optional: Adds a 15-minute random delay after boot so your laptop
+    # doesn't immediately bog down its internet connection while you log in
+    RandomizedDelaySec = "15m";
+  };
+
+  # Add the post-stop trigger to send the push notification
+  systemd.services.nixos-upgrade = {
+    postStop = ''
+      # --- CONFIGURATION VARIABLES ---
+      GOTIFY_URL="http://gotify.athomeadmin.net"
+      GOTIFY_TOKEN=" APB9Skxr6gl8zdo" # Replace with your actual token
+      # -------------------------------
+
+      # Get the hostname of this computer
+      HOSTNAME=$(${pkgs.coreutils}/bin/hostname)
+
+      # Determine message details based on the systemd service outcome
+      if [ "$SERVICE_RESULT" = "success" ]; then
+        TITLE="NixOS Upgrade Success"
+        MESSAGE="Auto-upgrade completed successfully on $HOSTNAME."
+        PRIORITY=5 # Normal priority
+      else
+        TITLE="NixOS Upgrade Failed"
+        MESSAGE="Auto-upgrade encountered an error on $HOSTNAME. Run 'journalctl -u nixos-upgrade' to debug."
+        PRIORITY=8 # High priority (causes a louder notification/vibration on most phones)
+      fi
+
+      # Send the payload to the Gotify server API
+      ${pkgs.curl}/bin/curl -s -X POST "$GOTIFY_URL/message?token=$GOTIFY_TOKEN" \
+        -F "title=$TITLE" \
+        -F "message=$MESSAGE" \
+        -F "priority=$PRIORITY"
+    '';
+  };
+
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];
   # networking.firewall.allowedUDPPorts = [ ... ];
