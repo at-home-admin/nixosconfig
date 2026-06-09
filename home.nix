@@ -156,6 +156,8 @@ in
       hyprlock
       hyprshot
       pandoc
+      sqlite
+      psql
     ])
 
     ++

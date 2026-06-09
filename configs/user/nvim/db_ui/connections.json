@@ -1,1 +1,1 @@
-[{"url": "postgresql://bfoster:DeathtoHellvato!@monty.lab.tekhome.xyz:5432", "name": "monty.lab.tekhome.xyz:5432"}]
+[{"url": "postgresql://bfoster:DeathtoHellvato!@monty.lab.tekhome.xyz:5432", "name": "monty.lab.tekhome.xyz:5432"}, {"url": "sqlite:/users/bfoster/Projects/Python/plectrum/plectrum.db", "name": "plectrum.db"}]
