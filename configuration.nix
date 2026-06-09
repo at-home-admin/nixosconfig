@@ -61,6 +61,9 @@
     withUWSM = true;
   };
 
+  environment.sessionVariables = {
+    QT_LOGGING_RULES = "qt.qpa.wayland.debug=false";
+  };
   # Optional: Recommended for Electron apps to use Wayland
   environment.sessionVariables.NIXOS_OZONE_WL = "1";
 
