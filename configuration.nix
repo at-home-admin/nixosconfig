@@ -240,7 +240,7 @@
   systemd.services.nixos-upgrade = {
     postStop = ''
       # --- CONFIGURATION VARIABLES ---
-      GOTIFY_URL="http://gotify.athomeadmin.net"
+      GOTIFY_URL="http://notifications.athomeadmin.net"
       GOTIFY_TOKEN=" APB9Skxr6gl8zdo" # Replace with your actual token
       # -------------------------------
 
