@@ -172,6 +172,12 @@
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 
+  security.wrappers.sniffnet = {
+    source = "${pkgs.sniffnet}/bin/sniffnet";
+    capabilities = "cap_net_raw,cap_net_admin=eip";
+    owner = "root";
+    group = "root";
+  };
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
