@@ -1,6 +1,20 @@
 -- bootstrap lazy.nvim, LazyVim and your plugins
 vim.opt.clipboard = "unnamedplus"
 
+local table_group = vim.api.nvim_create_augroup("TableNvimFormat", { clear = true })
+
+-- Format table whenever you leave insert mode or save a markdown file
+vim.api.nvim_create_autocmd({ "InsertLeave", "BufWritePre" }, {
+    group = table_group,
+    pattern = "*.md", -- Only target markdown files
+    callback = function()
+        local table_nvim = package.loaded["table-nvim"]
+        if table_nvim then
+            -- Safely attempt to format the active table under the cursor
+            pcall(table_nvim.format)
+        end
+    end,
+})
 
 require("config.lazy")
 
