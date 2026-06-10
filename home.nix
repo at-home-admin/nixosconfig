@@ -160,6 +160,7 @@ in
       postgresql
       sqlitebrowser
       mdfried
+      sniffnet
     ])
 
     ++
