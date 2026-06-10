@@ -89,6 +89,7 @@ hl.bind(mainMod .. " + C", hl.dsp.exec_cmd("env MOZ_ENABLE_WAYLAND=1 " .. browse
 hl.bind(mainMod .. " + N", hl.dsp.exec_cmd(terminal .. " --hold --directory /home/bfoster/config -e tv"))
 hl.bind(mainMod .. " + W", hl.dsp.exec_cmd("warp-terminal"))
 hl.bind(mainMod .. " + K", hl.dsp.exec_cmd("showmethekey-gtk -k -A"))
+hl.bind(mainMod .. " + S", hl.dsp.exec_cmd("sniffnet"))
 
 hl.bind(mainMod .. " + left", hl.dsp.focus({ direction = "left" }))
 hl.bind(mainMod .. " + h", hl.dsp.focus({ direction = "left" }))
