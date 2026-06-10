@@ -159,6 +159,7 @@ in
       sqlite
       postgresql
       sqlitebrowser
+      mdfried
     ])
 
     ++
