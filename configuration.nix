@@ -18,9 +18,12 @@
   ];
 
   # Bootloader.
-  boot.loader.grub.enable = true;
-  boot.loader.grub.device = "/dev/sda";
-  boot.loader.grub.useOSProber = true;
+  boot.loader.systemd-boot.enable = true;
+  boot.loader.efi.canTouchEfiVariables = true;
+
+  boot.kernelPackages = pkgs.linuxPackages_latest;
+  boot.initrd.systemd.tpm2.enable = false;
+  security.tpm2.enable = false;
 
   networking.hostName = "EXILE"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
@@ -48,6 +51,25 @@
     "i915.enable_fbc=0"
     "intel_idle.max_cstate=2"
   ];
+  # Kernel Modules Blacklisted
+  boot.blacklistedKernelModules = [
+    "tpm_tis"
+    "tpm_tis_core"
+    "tpm"
+    "tpm_tis_core"
+    "tpm_crb"
+    "efivarfs"
+    "tpm"
+    "tpm_tis"
+    "tpm_tis_core"
+    "tpm_crb"
+  ];
+  systemd.services."dev-tpm0.device".enable = false;
+
+  systemd.services."dev-tpmrm0.device".enable = false;
+
+  systemd.targets."tpm2.target".enable = false;
+
   # Enable the X11 windowing system.
   #  services.xserver.enable = true;
 
