@@ -161,6 +161,8 @@ in
       sqlitebrowser
       mdfried
       sniffnet
+      tmux
+      tmuxinator
     ])
 
     ++

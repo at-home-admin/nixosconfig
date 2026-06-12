@@ -7,6 +7,7 @@
   pkgs,
   inputs,
   pkgs-unstable,
+  lib,
   ...
 }:
 
@@ -24,7 +25,6 @@
   boot.kernelPackages = pkgs.linuxPackages_latest;
   boot.initrd.systemd.tpm2.enable = false;
   security.tpm2.enable = false;
-
   networking.hostName = "EXILE"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
@@ -41,6 +41,12 @@
 
   # Select internationalisation properties.
   i18n.defaultLocale = "en_CA.UTF-8";
+
+  boot.initrd.kernelModules = [ ];
+  systemd.services."NetworkManager-wait-online".enable = false;
+
+  systemd.units."dev-ttyS1.device".text = "";
+  systemd.units."sys-devices-platform-serial8250.0-tty-ttyS1.device".text = "";
   # Set Boot parameters to stop overwriting on Login Screen
   boot.kernelParams = [
     "quiet"
@@ -50,6 +56,16 @@
     "i915.enable_psr=0"
     "i915.enable_fbc=0"
     "intel_idle.max_cstate=2"
+    "systemd.tpm2_wait=false"
+    "systemd.tpm2_automount=false"
+    "tpm_tis.interrupts=0"
+    "initcall_blacklist=tpm_tim_init"
+    "systemd.tpm2_wait=false"
+    "systemd.default_device_timeout_sec=1"
+    "acpi_os_name=Linux"
+    "acpi_enforce_resources=lax"
+    "tpm_tis.force=0"
+
   ];
   # Kernel Modules Blacklisted
   boot.blacklistedKernelModules = [
@@ -65,11 +81,18 @@
     "tpm_crb"
   ];
   systemd.services."dev-tpm0.device".enable = false;
-
+  #
   systemd.services."dev-tpmrm0.device".enable = false;
-
+  #
   systemd.targets."tpm2.target".enable = false;
-
+  systemd.targets.tpm2.enable = false;
+  systemd.targets.tpm2.wantedBy = lib.mkForce [ ];
+  boot.initrd.services.udev.rules = ''
+    SUBSYSTEM=="tpm", ENV{SYSTEMD_READY}="0"
+    KERNEL=="tpm0", ENV{SYSTEMD_READY}="0"
+    KERNEL=="tpmrm0", ENV{SYSTEMD_READY}="0"
+  '';
+  boot.initrd.systemd.enable = true;
   # Enable the X11 windowing system.
   #  services.xserver.enable = true;
 
