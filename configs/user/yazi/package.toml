@@ -1,0 +1,9 @@
+[[plugin.deps]]
+use = "Rolv-Apneseth/starship"
+rev = "a837101"
+hash = "635b0feb9215772d22020eb0abf0bb34"
+
+[[flavor.deps]]
+use = "marcosvnmelo/kanagawa-dragon"
+rev = "b433f4a"
+hash = "b967c24a30350b1c5cd3a2ad5a7732e7"
