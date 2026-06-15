@@ -28,4 +28,4 @@ jobs:
           gotify_api_base: "${{ secrets.gotify_api_base }}"
           gotify_app_token: "${{ secrets.gotify_app_token }}"
           notification_title: "Build Successful"
-          notification_message: "Your build was completed successfully!"
+          notification_message: "Your NixOS Flake was updated successfully!"
