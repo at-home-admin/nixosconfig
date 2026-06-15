@@ -163,6 +163,7 @@ in
       sniffnet
       tmux
       tmuxinator
+      prettier
     ])
 
     ++
