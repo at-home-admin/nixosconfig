@@ -21,3 +21,11 @@ jobs:
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
           commit_message: "YARARA BUILD - automated flake update"
+
+      - name: Send Gotify Notification
+        uses: eikendev/gotify-action@master
+        with:
+          gotify_api_base: "${{ secrets.gotify_api_base }}"
+          gotify_app_token: "${{ secrets.gotify_app_token }}"
+          notification_title: "Build Successful"
+          notification_message: "Your build was completed successfully!"
