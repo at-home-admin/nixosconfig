@@ -164,6 +164,7 @@ in
       tmux
       tmuxinator
       prettier
+      nemo-with-extensions
     ])
 
     ++
@@ -176,7 +177,17 @@ in
       ]);
 
   wayland.windowManager.hyprland.systemd.enable = false;
-
+  services.udiskie = {
+    enable = true;
+    settings = {
+      # workaround for
+      # https://github.com/nix-community/home-manager/issues/632
+      program_options = {
+        # replace with your favorite file manager
+        file_manager = "${pkgs.nemo-with-extensions}/bin/nemo";
+      };
+    };
+  };
   # Install Cursor Theme
   home.pointerCursor = {
     gtk.enable = true;
