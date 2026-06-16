@@ -164,7 +164,6 @@ in
       tmux
       tmuxinator
       prettier
-      markdown-extra
     ])
 
     ++
