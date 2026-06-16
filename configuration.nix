@@ -260,6 +260,9 @@
   services.openssh.enable = true;
 
   programs.thunar.enable = true;
+
+  services.udisks2.enable = true;
+
   # Enable Automatic Garbage Collection (Clear Out Old COnfigurations and Packages)
   nix.gc = {
     automatic = true;
