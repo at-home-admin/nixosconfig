@@ -165,6 +165,7 @@ in
       tmuxinator
       prettier
       nemo-with-extensions
+      ansible
     ])
 
     ++
