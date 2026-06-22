@@ -166,6 +166,7 @@ in
       prettier
       nemo-with-extensions
       ansible
+      tree
     ])
 
     ++
