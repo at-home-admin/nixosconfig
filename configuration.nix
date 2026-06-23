@@ -287,6 +287,7 @@
     flags = [
       "--print-build-logs"
       "--commit-lock-file" # Automatically saves your updated flake.lock
+      "--no-channel-copy" # Stops the script from checking channels.nixos.org
     ];
   };
 
