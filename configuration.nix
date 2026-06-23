@@ -10,7 +10,21 @@
   lib,
   ...
 }:
+let
+  gotifyUrl = "https://notification.athomeadmin.net";
+  gotifyToken = "ACeTrqPOxl6UTnA";
 
+  # Helper script to send the push notification
+  gotifyNotify =
+    title: message: priority:
+    pkgs.writeShellScript "gotify-notify" ''
+      ${pkgs.curl}/bin/curl -s -X POST "${gotifyUrl}/message" \
+        -F "title=${title}" \
+        -F "message=${message}" \
+        -F "priority=${priority}" \
+        -F "token=${gotifyToken}" > /dev/null
+    '';
+in
 {
   imports = [
     # Include the results of the hardware scan.
@@ -279,7 +293,7 @@
   # Enable Automatic Upgrades and Turn Off Auto Reboot
   system.autoUpgrade = {
     enable = true;
-    flake = "github.com:at-home-admin/nixos-config/"; # Path to your configuration directory
+    flake = "github:at-home-admin/nixos-config#EXILE"; # Path to your configuration directory
     dates = "21:00";
     randomizedDelaySec = "15min";
     operation = "switch";
@@ -287,37 +301,33 @@
     flags = [
       "--print-build-logs"
       "--commit-lock-file" # Automatically saves your updated flake.lock
-      "--no-channel-copy" # Stops the script from checking channels.nixos.org
+      "--update-input"
+      "--L"
+      "nixpkgs"
     ];
   };
 
-  # Add the post-stop trigger to send the push notification
-  systemd.services.nixos-upgrade = {
-    postStop = ''
-      # --- CONFIGURATION VARIABLES ---
-      GOTIFY_URL="https://notification.athomeadmin.net"
-      GOTIFY_TOKEN="ACeTrqPOxl6UTnA" # Replace with your actual token
-      # -------------------------------
-
-      # Get the hostname of this computer
-      HOSTNAME=$(${pkgs.coreutils}/bin/hostname)
-
-      # Determine message details based on the systemd service outcome
-      if [ "$SERVICE_RESULT" = "success" ]; then
-        TITLE="NixOS Upgrade Success"
-        MESSAGE="Auto-upgrade completed successfully on $HOSTNAME."
-        PRIORITY=5 # Normal priority
+  # 2. Templated Service for Notifications
+  systemd.services."notify-gotify@" = {
+    description = "Send Gotify notification for %I";
+    serviceConfig.Type = "oneshot";
+    script = ''
+      SERVICE_NAME="%I"
+      # Check if service succeeded or failed
+      if ${pkgs.systemd}/bin/systemctl is-active --quiet $SERVICE_NAME; then
+        ${gotifyNotify "NixOS Update Succeeded" "System successfully rebuilt and updated via flakes." "3"}
       else
-        TITLE="NixOS Upgrade Failed"
-        MESSAGE="Auto-upgrade encountered an error on $HOSTNAME. Run 'journalctl -u nixos-upgrade' to debug."
-        PRIORITY=8 # High priority (causes a louder notification/vibration on most phones)
+        LOG=$(${pkgs.systemd}/bin/systemctl status --no-pager $SERVICE_NAME)
+        ${gotifyNotify "NixOS Update Failed" "System update failed! \n\n$LOG" "8"}
       fi
+    '';
+  };
 
-      # Send the payload to the Gotify server API
-      ${pkgs.curl}/bin/curl -s -X POST "$GOTIFY_URL/message?token=$GOTIFY_TOKEN" \
-        -F "title=$TITLE" \
-        -F "message=$MESSAGE" \
-        -F "priority=$PRIORITY"
+  # 3. Trigger notification on Upgrade failure or success
+  systemd.services.nixos-upgrade = {
+    onFailure = [ "notify-gotify@%n.service" ];
+    postStart = ''
+      ${pkgs.systemd}/bin/systemctl start notify-gotify@%n.service
     '';
   };
 
