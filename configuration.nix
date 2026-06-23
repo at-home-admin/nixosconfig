@@ -294,7 +294,7 @@ in
   system.autoUpgrade = {
     enable = true;
     flake = "github:at-home-admin/nixosconfig"; # Path to your configuration directory
-    dates = "21:00";
+    dates = "16:00";
     randomizedDelaySec = "15min";
     operation = "switch";
     persistent = true;
