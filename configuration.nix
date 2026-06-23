@@ -293,7 +293,7 @@ in
   # Enable Automatic Upgrades and Turn Off Auto Reboot
   system.autoUpgrade = {
     enable = true;
-    flake = "github:at-home-admin/nixos-config#EXILE"; # Path to your configuration directory
+    flake = "github:at-home-admin/nixosconfig"; # Path to your configuration directory
     dates = "21:00";
     randomizedDelaySec = "15min";
     operation = "switch";
