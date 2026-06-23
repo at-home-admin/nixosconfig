@@ -301,9 +301,6 @@ in
     flags = [
       "--print-build-logs"
       "--commit-lock-file" # Automatically saves your updated flake.lock
-      "--update-input"
-      "nixpkgs"
-      "nixpkgs"
     ];
   };
 
