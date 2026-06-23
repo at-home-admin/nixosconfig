@@ -154,8 +154,6 @@ in
       nushell
       atuin
       waypaper
-      hypridle
-      hyprlock
       hyprshot
       pandoc
       sqlite
@@ -169,6 +167,7 @@ in
       nemo-with-extensions
       ansible
       tree
+      mako
     ])
 
     ++
