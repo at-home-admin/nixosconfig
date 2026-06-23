@@ -294,7 +294,7 @@ in
   system.autoUpgrade = {
     enable = true;
     flake = "github:at-home-admin/nixosconfig"; # Path to your configuration directory
-    dates = "16:00";
+    dates = "16:30";
     randomizedDelaySec = "15min";
     operation = "switch";
     persistent = true;
@@ -302,7 +302,7 @@ in
       "--print-build-logs"
       "--commit-lock-file" # Automatically saves your updated flake.lock
       "--update-input"
-      "--L"
+      "nixpkgs"
       "nixpkgs"
     ];
   };
