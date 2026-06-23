@@ -72,7 +72,7 @@ in
       z = "zoxide";
       rebuildstore = "sudo nix-store --verify --check-contents --repair";
       icat = "kitty +kitten icat \"$(kitty +kitten choose-files)\"";
-      uplog = "journalctl -u nixos-upgrade.service";
+      uplog = "journalctl -u -e nixos-upgrade.service";
     };
   };
 
