@@ -168,6 +168,9 @@ in
       ansible
       tree
       mako
+      emacs
+      coreutils
+      clang
     ])
 
     ++
