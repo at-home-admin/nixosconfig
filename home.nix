@@ -107,7 +107,6 @@ in
       #nh
       nixpkgs-fmt
       nodejs
-      gcc
       cargo
       wl-clipboard
       starship
