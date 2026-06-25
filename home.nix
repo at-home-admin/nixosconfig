@@ -96,6 +96,8 @@ in
     fastfetch
     export YAZI_CONFIG_HOME="$HOME/config/configs/user/yazi"
     export PATH="$HOME/.config/emacs/bin:$PATH"
+    export XDG_CACHE_HOME="$HOME/.cache"
+
 
   '';
   # The home.packages option allows you to install Nix packages into your
