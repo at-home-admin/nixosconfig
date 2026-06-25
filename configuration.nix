@@ -10,10 +10,36 @@
   lib,
   ...
 }:
-#let
-#  gotifyUrl = "https://notification.athomeadmin.net";
-#  gotifyToken = "ACeTrqPOxl6UTnA";
-#in
+let
+  gotifyUrl = "https://notification.athomeadmin.net";
+  gotifyToken = "ACeTrqPOxl6UTnA";
+
+  gotifyNotify = pkgs.writeShellScript "gotify-notify" ''
+    set -euo pipefail
+
+    rc="${"1:-1"}"
+    host="$(hostname -s 2>/dev/null || hostname)"
+
+    if [ "$rc" -eq 0 ]; then
+      title="NixOS auto-upgrade: SUCCESS"
+      msg="Host: $host"
+    else
+      title="NixOS auto-upgrade: FAILED"
+      msg="Host: $host (exit code: $rc)"
+    fi
+
+    json_title="$(${pkgs.jq}/bin/jq -Rs . <<<"$title")"
+    json_msg="$(${pkgs.jq}/bin/jq -Rs . <<<"$msg")"
+
+    payload="{\"title\":$json_title,\"message\":$json_msg}"
+
+    ${pkgs.curl}/bin/curl -fsS \
+      -H "X-Gotify-Token: ${gotifyToken}" \
+      -H "Content-Type: application/json" \
+      -d "$payload" \
+      "${gotifyUrl}" >/dev/null
+  '';
+in
 {
   imports = [
     # Include the results of the hardware scan.
@@ -293,15 +319,13 @@
     ];
   };
 
-  # TIMER: match your autoupdate schedule
-  # If your autoupdate timer already exists and you want “after it runs” exactly,
-  # tell me the exact unit name you’re using and I’ll wire OnUnitActive/Unit directives precisely.
-  systemd.timers.gotify-nix-autoupdate = {
-    wantedBy = [ "timers.target" ];
-    timerConfig = {
-      OnCalendar = "daily"; # CHANGE to match your autoupdate timer schedule
-      Persistent = true;
-      Unit = "gotify-nix-autoupdate.service";
+  systemd.services."system.autoUpgrade" = {
+    serviceConfig = {
+      # Only runs on successful ExecStart
+      ExecStartPost = "${gotifyNotify} 0";
+
+      # Runs when the unit enters "failed"
+      ExecStopPost = "${gotifyNotify} 1";
     };
   };
 
