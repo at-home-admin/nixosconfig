@@ -13,17 +13,6 @@
 let
   gotifyUrl = "https://notification.athomeadmin.net";
   gotifyToken = "ACeTrqPOxl6UTnA";
-
-  # Helper script to send the push notification
-  gotifyNotify =
-    title: message: priority:
-    pkgs.writeShellScript "gotify-notify" ''
-      ${pkgs.curl}/bin/curl -s -X POST "${gotifyUrl}/message" \
-        -F "title=${title}" \
-        -F "message=${message}" \
-        -F "priority=${priority}" \
-        -F "token=${gotifyToken}" > /dev/null
-    '';
 in
 {
   imports = [
@@ -294,7 +283,7 @@ in
   system.autoUpgrade = {
     enable = true;
     flake = "github:at-home-admin/nixosconfig#EXILE"; # Path to your configuration directory
-    dates = "17:00";
+    dates = "18:00";
     randomizedDelaySec = "15min";
     operation = "switch";
     persistent = true;
@@ -304,28 +293,29 @@ in
     ];
   };
 
-  # 2. Templated Service for Notifications
-  systemd.services."notify-gotify@" = {
-    description = "Send Gotify notification for %I";
-    serviceConfig.Type = "oneshot";
+  systemd.services.gotify-nix-autoupdate = {
+    description = "Send Gotify notification after NixOS autoupdate";
+    serviceConfig = {
+      Type = "oneshot";
+    };
     script = ''
-      SERVICE_NAME="%I"
-      # Check if service succeeded or failed
-      if ${pkgs.systemd}/bin/systemctl is-active --quiet $SERVICE_NAME; then
-        ${gotifyNotify "NixOS Update Succeeded" "System successfully rebuilt and updated via flakes." "3"}
-      else
-        LOG=$(${pkgs.systemd}/bin/systemctl status --no-pager $SERVICE_NAME)
-        ${gotifyNotify "NixOS Update Failed" "System update failed! \n\n$LOG" "8"}
-      fi
+      export GOTIFY_URL=${builtins.toString gotifyUrl}
+      export GOTIFY_TOKEN=${builtins.toString gotifyToken}
+      export MESSAGE="NixOS autoupdate ran at $(date -Is)"
+      /etc/nixos/scripts/gotify-notify.sh
     '';
   };
 
-  # 3. Trigger notification on Upgrade failure or success
-  systemd.services.nixos-upgrade = {
-    onFailure = [ "notify-gotify@%n.service" ];
-    postStart = ''
-      ${pkgs.systemd}/bin/systemctl start notify-gotify@%n.service
-    '';
+  # TIMER: match your autoupdate schedule
+  # If your autoupdate timer already exists and you want “after it runs” exactly,
+  # tell me the exact unit name you’re using and I’ll wire OnUnitActive/Unit directives precisely.
+  systemd.timers.gotify-nix-autoupdate = {
+    wantedBy = [ "timers.target" ];
+    timerConfig = {
+      OnCalendar = "daily"; # CHANGE to match your autoupdate timer schedule
+      Persistent = true;
+      Unit = "gotify-nix-autoupdate.service";
+    };
   };
 
   # Open ports in the firewall.
