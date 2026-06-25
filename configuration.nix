@@ -302,7 +302,7 @@ in
       export GOTIFY_URL=${builtins.toString gotifyUrl}
       export GOTIFY_TOKEN=${builtins.toString gotifyToken}
       export MESSAGE="NixOS autoupdate ran at $(date -Is)"
-      ./scripts/gotify-notify.sh
+      ~/config/scripts/gotify-notify.sh
     '';
   };
 
