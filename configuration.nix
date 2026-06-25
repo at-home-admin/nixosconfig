@@ -35,7 +35,7 @@ in
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
-
+  boot.loader.efi.efiSysMountPoint = "/boot";
   boot.kernelPackages = pkgs.linuxPackages_latest;
   boot.initrd.systemd.tpm2.enable = false;
   security.tpm2.enable = false;
@@ -293,7 +293,7 @@ in
   # Enable Automatic Upgrades and Turn Off Auto Reboot
   system.autoUpgrade = {
     enable = true;
-    flake = "github:at-home-admin/nixosconfig"; # Path to your configuration directory
+    flake = "github:at-home-admin/nixosconfig#EXILE"; # Path to your configuration directory
     dates = "Mon 17:00";
     randomizedDelaySec = "15min";
     operation = "switch";
