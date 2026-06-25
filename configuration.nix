@@ -10,10 +10,10 @@
   lib,
   ...
 }:
-let
-  gotifyUrl = "https://notification.athomeadmin.net";
-  gotifyToken = "ACeTrqPOxl6UTnA";
-in
+#let
+#  gotifyUrl = "https://notification.athomeadmin.net";
+#  gotifyToken = "ACeTrqPOxl6UTnA";
+#in
 {
   imports = [
     # Include the results of the hardware scan.
@@ -291,19 +291,6 @@ in
       "--print-build-logs"
       "--commit-lock-file" # Automatically saves your updated flake.lock
     ];
-  };
-
-  systemd.services.gotify-nix-autoupdate = {
-    description = "Send Gotify notification after NixOS autoupdate";
-    serviceConfig = {
-      Type = "oneshot";
-    };
-    script = ''
-      export GOTIFY_URL=${builtins.toString gotifyUrl}
-      export GOTIFY_TOKEN=${builtins.toString gotifyToken}
-      export MESSAGE="NixOS autoupdate ran at $(date -Is)"
-      ~/config/scripts/gotify-notify.sh
-    '';
   };
 
   # TIMER: match your autoupdate schedule
