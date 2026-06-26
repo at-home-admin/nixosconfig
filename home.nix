@@ -173,6 +173,7 @@ in
       mako
       emacs
       coreutils
+      jq
     ])
 
     ++
