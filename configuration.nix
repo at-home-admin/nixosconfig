@@ -11,34 +11,8 @@
   ...
 }:
 let
-  gotifyUrl = "https://notification.athomeadmin.net";
-  gotifyToken = "ACeTrqPOxl6UTnA";
-
-  gotifyNotify = pkgs.writeShellScript "gotify-notify" ''
-    set -euo pipefail
-
-    rc="${"1:-1"}"
-    host="$(hostname -s 2>/dev/null || hostname)"
-
-    if [ "$rc" -eq 0 ]; then
-      title="NixOS auto-upgrade: SUCCESS"
-      msg="Host: $host"
-    else
-      title="NixOS auto-upgrade: FAILED"
-      msg="Host: $host (exit code: $rc)"
-    fi
-
-    json_title="$(${pkgs.jq}/bin/jq -Rs . <<<"$title")"
-    json_msg="$(${pkgs.jq}/bin/jq -Rs . <<<"$msg")"
-
-    payload="{\"title\":$json_title,\"message\":$json_msg}"
-
-    ${pkgs.curl}/bin/curl -fsS \
-      -H "X-Gotify-Token: ${gotifyToken}" \
-      -H "Content-Type: application/json" \
-      -d "$payload" \
-      "${gotifyUrl}" >/dev/null
-  '';
+  flakeRef = "github:at-home-admin/nixosconfig#EXILE";
+  gotifyBase = "https://notification.athomeadmin.net";
 in
 {
   imports = [
@@ -306,26 +280,48 @@ in
   };
   nix.optimise.automatic = true; # Optimise storage
   # Enable Automatic Upgrades and Turn Off Auto Reboot
-  system.autoUpgrade = {
-    enable = true;
-    flake = "github:at-home-admin/nixosconfig#EXILE"; # Path to your configuration directory
-    dates = "18:00";
-    randomizedDelaySec = "15min";
-    operation = "switch";
-    persistent = true;
-    flags = [
-      "--print-build-logs"
-      "--commit-lock-file" # Automatically saves your updated flake.lock
-    ];
+  systemd.services.nixos-flake-autoupdate = {
+    description = "Autoupdate NixOS flake and send Gotify update";
+    serviceConfig = {
+      Type = "oneshot";
+      User = "root";
+      Environment = [
+        "FLAKE_REF=${flakeRef}"
+        "GOTIFY_BASE=${gotifyBase}"
+        "GOTIFY_TOKEN_FILE=/run/secrets/gotify-token"
+      ];
+    };
+
+    script = ''
+      set -euo pipefail
+
+      export GOTIFY_TOKEN="$(cat "$GOTIFY_TOKEN_FILE")"
+
+      workdir="$(mktemp -d /var/tmp/nixos-flake-autoupdate.XXXXXX)"
+      trap 'rm -rf "$workdir"' EXIT
+      cd "$workdir"
+
+      # Update the flake inputs
+      ${pkgs.nixFlakes}/bin/nix flake update "$FLAKE_REF" || true
+
+      # Rebuild (your command)
+      sudo ${pkgs.nixos-rebuild}/bin/nixos-rebuild switch --flake "$FLAKE_REF"
+
+      # Send Gotify notification
+      msg="NixOS flake autoupdate: SUCCESS for $FLAKE_REF"
+      ${pkgs.curl}/bin/curl -fsS \
+        -X POST "${gotifyBase}/message?token=$GOTIFY_TOKEN" \
+        -H "Content-Type: application/json" \
+        -d "$(printf '{"message":"%s"}' "$msg")" || true
+    '';
   };
 
-  systemd.services."system.autoUpgrade" = {
-    serviceConfig = {
-      # Only runs on successful ExecStart
-      ExecStartPost = "${gotifyNotify} 0";
-
-      # Runs when the unit enters "failed"
-      ExecStopPost = "${gotifyNotify} 1";
+  systemd.timers.nixos-flake-autoupdate = {
+    description = "Run flake autoupdate every Monday at 3pm";
+    wantedBy = [ "timers.target" ];
+    timerConfig = {
+      OnCalendar = "daily";
+      Persistent = true;
     };
   };
 
