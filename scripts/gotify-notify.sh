@@ -1,8 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-GOTIFY_URL="https://notification.athomeadmin.net" # <- change
-GOTIFY_TOKEN="ACeTrqPOxl6UTnA"                    # <- change
+GOTIFY_URL="https://notification.athomeadmin.net/message?token=ACeTrqPOxl6UTnA" # <- change
 
 TEXT_OK="NixOS auto-upgrade: SUCCESS"
 TEXT_FAIL="NixOS auto-upgrade: FAILED"
@@ -22,14 +21,13 @@ else
 fi
 
 # Gotify supports JSON with title/message fields (adjust if your instance differs)
-PAYLOAD="$(jq -nc --arg title "$TITLE" --arg msg "Host: $HOST" '{title:$title, message:$msg}')"
+PAYLOAD="$(jq -nc --arg title "$TITLE" --arg msg "Host: $HOST"'{title:$title, message:$msg}')"
 
 # If you don't have jq, replace PAYLOAD creation with a literal JSON string.
 # Example without jq:
 # PAYLOAD="{\"title\":\"$TITLE\",\"message\":\"Host: $HOST\"}"
 
-curl -fsS \
-  -H "X-Gotify-Token: ${GOTIFY_TOKEN}" \
+curl -X POST \
   -H "Content-Type: application/json" \
   -d "$PAYLOAD" \
   "$GOTIFY_URL" >/dev/null
