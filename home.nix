@@ -55,7 +55,7 @@ in
       zreload = "source /home/bfoster/.zshrc";
       #breload = "source /home/bfoster/.bashrc";
       whosyourdaddy = "echo eat shite";
-      rebuildnix = "sudo nixos-rebuild switch --flake 'github:at-home-admin/nixosconfig#EXILE";
+      rebuildnix = "sudo nixos-rebuild switch --flake 'github:at-home-admin/nixosconfig#EXILE'";
       conf = "sudo nvim ~/.zshrc";
       devshell = "nix-shell --pure";
       rust = "rustc";
