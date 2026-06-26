@@ -11,8 +11,25 @@
   ...
 }:
 let
-  flakeRef = "github:at-home-admin/nixosconfig#EXILE";
-  gotifyBase = "https://notification.athomeadmin.net";
+
+  serverName = "https://notification.athomeadmin.net";
+  gotifyNotify = pkgs.writeShellScript "gotify-notify" ''
+    set -euo pipefail
+
+    # Prefer secrets from wherever you store them.
+    GOTIFY_URL="${serverName}"
+    TOKEN="$(cat "GOTIFY_TOKEN_FILE")"
+
+    if [ -z "$TOKEN" ]; then
+      echo "Missing Gotify token (configure services.gotify.token or provide via your own method)."
+      exit 1
+    fi
+
+    curl -fsS \
+      -H "X-Gotify-Token: $TOKEN" \
+      -X POST "$GOTIFY_URL/message?title=$(printf '%s' "autoUpgrade" | jq -sRr @uri)&message=$(printf '%s' "autoUpgrade finished (operation=switch)" | jq -sRr @uri)" \
+      >/dev/null
+  '';
 in
 {
   imports = [
@@ -108,7 +125,7 @@ in
     enable = true;
     withUWSM = true;
   };
-
+  environment.variables.GOTIFY_TOKEN_FILE = "~/token/gotify-notify";
   environment.sessionVariables = {
     QT_LOGGING_RULES = "qt.qpa.wayland.debug=false";
   };
@@ -292,7 +309,9 @@ in
       "--commit-lock-file" # Automatically saves your updated flake.lock
     ];
   };
-
+  systemd.services.nixos-upgrade.serviceConfig = {
+    ExecStartPost = lib.mkAfter "${gotifyNotify}";
+  };
   services.gotify.enable = true;
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];
