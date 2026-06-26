@@ -302,10 +302,10 @@ in
       cd "$workdir"
 
       # Update the flake inputs
-      ${pkgs.nixFlakes}/bin/nix flake update "$FLAKE_REF" || true
+      nix flake update "$FLAKE_REF" || true
 
       # Rebuild (your command)
-      sudo ${pkgs.nixos-rebuild}/bin/nixos-rebuild switch --flake "$FLAKE_REF"
+      sudo nixos-rebuild switch --flake "$FLAKE_REF"
 
       # Send Gotify notification
       msg="NixOS flake autoupdate: SUCCESS for $FLAKE_REF"
