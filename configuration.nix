@@ -125,7 +125,7 @@ in
     enable = true;
     withUWSM = true;
   };
-  environment.variables.GOTIFY_TOKEN_FILE = "~/token/gotify-notify";
+  environment.variables.GOTIFY_TOKEN_FILE = "home/bfoster/token/gotify-notify";
   environment.sessionVariables = {
     QT_LOGGING_RULES = "qt.qpa.wayland.debug=false";
   };
@@ -300,7 +300,7 @@ in
   system.autoUpgrade = {
     enable = true;
     flake = "github:at-home-admin/nixosconfig#EXILE"; # Path to your configuration directory
-    dates = "Mon 15:00";
+    dates = "Mon 17:00";
     randomizedDelaySec = "15min";
     operation = "switch";
     persistent = true;
@@ -312,7 +312,10 @@ in
   systemd.services.nixos-upgrade.serviceConfig = {
     ExecStartPost = lib.mkAfter "${gotifyNotify}";
   };
-  services.gotify.enable = true;
+  services.gotify = {
+    enable = true;
+    port = 8080;
+  };
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];
   # networking.firewall.allowedUDPPorts = [ ... ];
