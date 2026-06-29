@@ -75,6 +75,7 @@ in
       icat = "kitty +kitten icat \"$(kitty +kitten choose-files)\"";
       uplog = "journalctl -u nixos-upgrade.service";
       uploglatest = "journalctl -u nixos-upgrade.service -e";
+      clearuplog = "sudo journalctl -u nixos-upgrade.service --vacuum-time=2d";
     };
   };
 
