@@ -17,11 +17,14 @@ jobs:
       - name: Update flake.lock
         id: update
         uses: DeterminateSystems/update-flake-lock@v23
-
-      - name: Commit and Push changes
-        uses: stefanzweifel/git-auto-commit-action@v5
         with:
-          commit_message: "YARARA BUILD - automated flake update"
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Merge Pull Request
+        run: gh pr merge --auto --rebase "${{ steps.update.outputs.pull-request-number }}"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        if: ${{ steps.update.outputs.pull-request-number != '' }}
 
       - name: Send Gotify Notification
         uses: eikendev/gotify-action@master
