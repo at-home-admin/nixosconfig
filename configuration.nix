@@ -314,7 +314,9 @@ in
   };
   services.gotify = {
     enable = true;
-    port = 8080;
+    environment = {
+      GOTIFY_SERVER_PORT = 8080;
+    };
   };
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];
