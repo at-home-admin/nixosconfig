@@ -303,15 +303,11 @@
       after = [ "network-online.target" ];
       wants = [ "network-online.target" ];
       script = ''
-        ${pkgs.gotify-cli}/bin/gotify push \
+        gotify push \ 
           -t "NixOS Update Succeeded" \
-          -p 5 \
+          -p 8 \
           "The service %i completed successfully on $(hostname). Your system is up to date."
       '';
-      serviceConfig = {
-        Type = "oneshot";
-        EnvironmentFile = "/var/lib/secrets/gotify.env";
-      };
     };
 
     "gotify-failure@" = {
@@ -319,15 +315,11 @@
       after = [ "network-online.target" ];
       wants = [ "network-online.target" ];
       script = ''
-        ${pkgs.gotify-cli}/bin/gotify push \
+        gotify push \
           -t "NixOS Update Failed!" \
-          -p 8 \
+          -p 10 \
           "Alert: The service %i failed on $(hostname). Check 'journalctl -u %i' for details."
       '';
-      serviceConfig = {
-        Type = "oneshot";
-        EnvironmentFile = "/var/lib/secrets/gotify.env";
-      };
     };
   };
 
