@@ -279,7 +279,7 @@
   system.autoUpgrade = {
     enable = true;
     flake = "github:at-home-admin/nixosconfig#EXILE"; # Path to your configuration directory
-    dates = " 15:00";
+    dates = "5:00";
     randomizedDelaySec = "15min";
     operation = "switch";
     persistent = true;
