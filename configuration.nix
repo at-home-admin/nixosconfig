@@ -10,27 +10,7 @@
   lib,
   ...
 }:
-let
 
-  serverName = "https://notification.athomeadmin.net";
-  gotifyNotify = pkgs.writeShellScript "gotify-notify" ''
-    set -euo pipefail
-
-    # Prefer secrets from wherever you store them.
-    GOTIFY_URL="${serverName}"
-    TOKEN="$(cat "GOTIFY_TOKEN_FILE")"
-
-    if [ -z "$TOKEN" ]; then
-      echo "Missing Gotify token (configure services.gotify.token or provide via your own method)."
-      exit 1
-    fi
-
-    curl -fsS \
-      -H "X-Gotify-Token: $TOKEN" \
-      -X POST "$GOTIFY_URL/message?title=$(printf '%s' "autoUpgrade" | jq -sRr @uri)&message=$(printf '%s' "autoUpgrade finished (operation=switch)" | jq -sRr @uri)" \
-      >/dev/null
-  '';
-in
 {
   imports = [
     # Include the results of the hardware scan.
@@ -125,7 +105,6 @@ in
     enable = true;
     withUWSM = true;
   };
-  environment.variables.GOTIFY_TOKEN_FILE = "home/bfoster/token/gotify-notify";
   environment.sessionVariables = {
     QT_LOGGING_RULES = "qt.qpa.wayland.debug=false";
   };
@@ -309,15 +288,49 @@ in
       "--commit-lock-file" # Automatically saves your updated flake.lock
     ];
   };
-  systemd.services.nixos-upgrade.serviceConfig = {
-    ExecStartPost = lib.mkAfter "${gotifyNotify}";
-  };
-  services.gotify = {
-    enable = true;
-    environment = {
-      GOTIFY_SERVER_PORT = 8080;
+  # 2. Hook the notification triggers into the existing upgrade service
+  systemd.services.nixos-upgrade = {
+    unitConfig = {
+      OnSuccess = "gotify-success@%n.service";
+      OnFailure = "gotify-failure@%n.service";
     };
   };
+
+  # 3. Define the reusable Gotify notification template services
+  systemd.services = {
+    "gotify-success@" = {
+      description = "Send Gotify success notification for %i";
+      after = [ "network-online.target" ];
+      wants = [ "network-online.target" ];
+      script = ''
+        ${pkgs.gotify-cli}/bin/gotify push \
+          -t "NixOS Update Succeeded" \
+          -p 5 \
+          "The service %i completed successfully on $(hostname). Your system is up to date."
+      '';
+      serviceConfig = {
+        Type = "oneshot";
+        EnvironmentFile = "/var/lib/secrets/gotify.env";
+      };
+    };
+
+    "gotify-failure@" = {
+      description = "Send Gotify failure notification for %i";
+      after = [ "network-online.target" ];
+      wants = [ "network-online.target" ];
+      script = ''
+        ${pkgs.gotify-cli}/bin/gotify push \
+          -t "NixOS Update Failed!" \
+          -p 8 \
+          "Alert: The service %i failed on $(hostname). Check 'journalctl -u %i' for details."
+      '';
+      serviceConfig = {
+        Type = "oneshot";
+        EnvironmentFile = "/var/lib/secrets/gotify.env";
+      };
+    };
+  };
+
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];
   # networking.firewall.allowedUDPPorts = [ ... ];
