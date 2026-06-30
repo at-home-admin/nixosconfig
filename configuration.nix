@@ -306,7 +306,7 @@
         gotify push \ 
           -t "NixOS Update Succeeded" \
           -p 8 \
-          "The service %i completed successfully on $(hostname). Your system is up to date."
+          "The update completed successfully on $(hostname). It will run again next Monday at or after 5 AM."
       '';
     };
 
@@ -318,7 +318,7 @@
         gotify push \
           -t "NixOS Update Failed!" \
           -p 10 \
-          "Alert: The service %i failed on $(hostname). Check 'journalctl -u %i' for details."
+          "Alert: System update failed on $(hostname). Check 'journalctl -u %i' for details."
       '';
     };
   };
