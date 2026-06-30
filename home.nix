@@ -175,6 +175,7 @@ in
       emacs
       coreutils
       jq
+      ghgrab
     ])
 
     ++
