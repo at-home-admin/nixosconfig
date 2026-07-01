@@ -298,42 +298,37 @@
     };
   };
 
-  # 3. Define the reusable Gotify notification template services
   systemd.services = {
     "gotify-success@" = {
       description = "Send Gotify success notification for %i";
       after = [ "network-online.target" ];
       wants = [ "network-online.target" ];
+      serviceConfig = {
+        Environment = [
+          "HOME=/root"
+          "GOTIFY_CONFIG=/root/.gotify/cli.json"
+        ];
+      };
       script = ''
         /etc/profiles/per-user/bfoster/bin/gotify push -t "NixOS Update Succeeded" -p 10 \
-        "The update completed successfully on $(cat /proc/sys/kernel/hostname) (unit: %i). It will run again Monday at or after 5 AM."
+          "The update completed successfully on $(cat /proc/sys/kernel/hostname) (unit: %i). It will run again Monday at or after 5 AM."
       '';
-    };
-
-    serviceConfig = {
-      Environment = [
-        "HOME=/root"
-        # "XDG_CONFIG_HOME=/root/.config"
-        "GOTIFY_CONFIG=/root/.gotify/cli.json"
-      ];
     };
 
     "gotify-failure@" = {
       description = "Send Gotify failure notification for %i";
       after = [ "network-online.target" ];
       wants = [ "network-online.target" ];
+      serviceConfig = {
+        Environment = [
+          "HOME=/root"
+          "GOTIFY_CONFIG=/root/.gotify/cli.json"
+        ];
+      };
       script = ''
         /etc/profiles/per-user/bfoster/bin/gotify push -t "NixOS Update Failed!" -p 10 \
           "Alert: System update failed on $(cat /proc/sys/kernel/hostname). Check 'journalctl -u %i' for details."
       '';
-      serviceConfig = {
-        Environment = [
-          "HOME=/root"
-          # "XDG_CONFIG_HOME=/root/.config"
-          "GOTIFY_CONFIG=/root/.gotify/cli.json"
-        ];
-      };
-
     };
   };
 
