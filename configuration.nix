@@ -174,6 +174,8 @@
       "wheel"
       "docker"
       "input"
+      "libvertd"
+      "kvm"
     ];
     packages = with pkgs; [
       #  thunderbird
