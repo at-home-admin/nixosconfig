@@ -305,7 +305,7 @@
       after = [ "network-online.target" ];
       wants = [ "network-online.target" ];
       script = ''
-        gotify push \ 
+        /etc/profiles/per-user/bfoster/bin/gotify push \ 
           -t "NixOS Update Succeeded" \
           -p 8 \
           "The update completed successfully on $(hostname). It will run again next Monday at or after 5 AM."
@@ -324,7 +324,7 @@
       after = [ "network-online.target" ];
       wants = [ "network-online.target" ];
       script = ''
-        gotify push \
+        /etc/profiles/per-user/bfoster/bin/gotify push \
           -t "NixOS Update Failed!" \
           -p 10 \
           "Alert: System update failed on $(hostname). Check 'journalctl -u %i' for details."
