@@ -281,7 +281,7 @@
   system.autoUpgrade = {
     enable = true;
     flake = "github:at-home-admin/nixosconfig#EXILE"; # Path to your configuration directory
-    dates = "5:00";
+    dates = "Monday 5:00";
     randomizedDelaySec = "15min";
     operation = "switch";
     persistent = true;
@@ -311,7 +311,7 @@
       };
       script = ''
         /etc/profiles/per-user/bfoster/bin/gotify push -t "NixOS Update Succeeded" -p 10 \
-          "The update completed successfully on $(cat /proc/sys/kernel/hostname) (unit: %i). It will run again Monday at or after 5 AM."
+          "The update completed successfully on $(cat /proc/sys/kernel/hostname) . It will run again Monday at or after 5 AM."
       '';
     };
 
@@ -327,7 +327,7 @@
       };
       script = ''
         /etc/profiles/per-user/bfoster/bin/gotify push -t "NixOS Update Failed!" -p 10 \
-          "Alert: System update failed on $(cat /proc/sys/kernel/hostname) (unit: %i). Check 'journalctl -u %i' for details."
+          "Alert: System update failed on $(cat /proc/sys/kernel/hostname). Check 'journalctl -u %i' for details."
       '';
     };
   };
