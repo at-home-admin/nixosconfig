@@ -291,16 +291,6 @@
     ];
   };
   # 2. Hook the notification triggers into the existing upgrade service
-<<<<<<< HEAD
-=======
-  systemd.services."nixos-upgrade" = {
-    unitConfig = {
-      OnSuccess = "gotify-success@%N.service";
-      OnFailure = "gotify-failure@%N.service";
-    };
-  };
-
->>>>>>> 3d508978cca384722660019f1ee3818bc3f97418
   systemd.services = {
     "nixos-upgrade" = {
       unitConfig = {
@@ -314,7 +304,7 @@
       after = [ "network-online.target" ];
       wants = [ "network-online.target" ];
       serviceConfig = {
-        Environment = [
+        environment = [
           "HOME=/root"
           "GOTIFY_CONFIG=/root/.gotify/cli.json"
         ];
@@ -330,18 +320,14 @@
       after = [ "network-online.target" ];
       wants = [ "network-online.target" ];
       serviceConfig = {
-        Environment = [
+        environment = [
           "HOME=/root"
           "GOTIFY_CONFIG=/root/.gotify/cli.json"
         ];
       };
       script = ''
         /etc/profiles/per-user/bfoster/bin/gotify push -t "NixOS Update Failed!" -p 10 \
-<<<<<<< HEAD
           "Alert: System update failed on $(cat /proc/sys/kernel/hostname) (unit: %i). Check 'journalctl -u %i' for details."
-=======
-          "Alert: System update failed on $(cat /proc/sys/kernel/hostname). Check 'journalctl -u %i' for details."
->>>>>>> 3d508978cca384722660019f1ee3818bc3f97418
       '';
     };
   };
