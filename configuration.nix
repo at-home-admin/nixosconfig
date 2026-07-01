@@ -291,10 +291,10 @@
     ];
   };
   # 2. Hook the notification triggers into the existing upgrade service
-  systemd.services.nixos-upgrade = {
+  systemd.services."nixos-upgrade" = {
     unitConfig = {
-      OnSuccess = "gotify-success@%n.service";
-      OnFailure = "gotify-failure@%n.service";
+      OnSuccess = "gotify-success@%N.service";
+      OnFailure = "gotify-failure@%N.service";
     };
   };
 
@@ -310,6 +310,13 @@
           -p 8 \
           "The update completed successfully on $(hostname). It will run again next Monday at or after 5 AM."
       '';
+      serviceConfig = {
+        Environment = [
+          "HOME=/root"
+          # "XDG_CONFIG_HOME=/root/.config"
+          "GOTIFY_CONFIG=/root/.gotify/cli.json"
+        ];
+      };
     };
 
     "gotify-failure@" = {
@@ -322,6 +329,14 @@
           -p 10 \
           "Alert: System update failed on $(hostname). Check 'journalctl -u %i' for details."
       '';
+      serviceConfig = {
+        Environment = [
+          "HOME=/root"
+          # "XDG_CONFIG_HOME=/root/.config"
+          "GOTIFY_CONFIG=/root/.gotify/cli.json"
+        ];
+      };
+
     };
   };
 
