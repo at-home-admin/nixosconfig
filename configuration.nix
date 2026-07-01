@@ -305,18 +305,17 @@
       after = [ "network-online.target" ];
       wants = [ "network-online.target" ];
       script = ''
-        /etc/profiles/per-user/bfoster/bin/gotify push \ 
-          -t "NixOS Update Succeeded" \
-          -p 8 \
-          "The update completed successfully on $(hostname). It will run again next Monday at or after 5 AM."
+        /etc/profiles/per-user/bfoster/bin/gotify push -t "NixOS Update Succeeded" -p 10 \
+        "The update completed successfully on $(cat /proc/sys/kernel/hostname) (unit: %i). It will run again Monday at or after 5 AM."
       '';
-      serviceConfig = {
-        Environment = [
-          "HOME=/root"
-          # "XDG_CONFIG_HOME=/root/.config"
-          "GOTIFY_CONFIG=/root/.gotify/cli.json"
-        ];
-      };
+    };
+
+    serviceConfig = {
+      Environment = [
+        "HOME=/root"
+        # "XDG_CONFIG_HOME=/root/.config"
+        "GOTIFY_CONFIG=/root/.gotify/cli.json"
+      ];
     };
 
     "gotify-failure@" = {
@@ -324,10 +323,8 @@
       after = [ "network-online.target" ];
       wants = [ "network-online.target" ];
       script = ''
-        /etc/profiles/per-user/bfoster/bin/gotify push \
-          -t "NixOS Update Failed!" \
-          -p 10 \
-          "Alert: System update failed on $(hostname). Check 'journalctl -u %i' for details."
+        /etc/profiles/per-user/bfoster/bin/gotify push -t "NixOS Update Failed!" -p 10 \
+          "Alert: System update failed on $(cat /proc/sys/kernel/hostname). Check 'journalctl -u %i' for details."
       '';
       serviceConfig = {
         Environment = [
