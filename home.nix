@@ -188,6 +188,7 @@ in
         warp-terminal
         neovim
         showmethekey
+        herdr
       ]);
 
   wayland.windowManager.hyprland.systemd.enable = false;
