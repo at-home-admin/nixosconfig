@@ -20,6 +20,7 @@ let
     television = "television";
     fastfetch = "fastfetch";
     # yazi = "yazi";
+    herdr = "herdr";
   };
 in
 {
@@ -179,6 +180,7 @@ in
       gns3-gui
       gns3-server
       ciscoPacketTracer9
+      gcc
     ])
 
     ++
