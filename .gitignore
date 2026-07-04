@@ -1,2 +1,5 @@
 /scripts
 /configs/user/herdr/plugins/github/cloudmanic.herdr-plus-0cce37b56fb9
+/configs/user/herdr/herdr-client.log
+/configs/user/herdr/herdr-server.log
+/configs/user/herdr/session.json
