@@ -10,3 +10,11 @@
 2026-07-04T00:52:08.503102Z  INFO herdr::client: connecting to server path=/home/bfoster/.config/herdr/herdr-client.sock
 2026-07-04T00:52:08.510552Z  INFO herdr::client: handshake succeeded version=14 encoding=SemanticFrame
 2026-07-04T00:52:27.120850Z  INFO herdr::logging: herdr exiting event="app.shutdown" subsystem="client" outcome="completed" pid=4697
+2026-07-04T04:50:14.759242Z  INFO herdr::logging: herdr starting event="app.startup" subsystem="client" outcome="started" pid=10147
+2026-07-04T04:50:14.759289Z  INFO herdr::client: connecting to server path=/home/bfoster/.config/herdr/herdr-client.sock
+2026-07-04T04:50:14.975315Z  INFO herdr::client: handshake succeeded version=14 encoding=SemanticFrame
+2026-07-04T04:50:44.374705Z  INFO herdr::logging: herdr exiting event="app.shutdown" subsystem="client" outcome="completed" pid=10147
+2026-07-04T04:50:55.727236Z  INFO herdr::logging: herdr starting event="app.startup" subsystem="client" outcome="started" pid=10656
+2026-07-04T04:50:55.727272Z  INFO herdr::client: connecting to server path=/home/bfoster/.config/herdr/herdr-client.sock
+2026-07-04T04:50:55.936479Z  INFO herdr::client: handshake succeeded version=14 encoding=SemanticFrame
+2026-07-04T04:51:01.059571Z  INFO herdr::logging: herdr exiting event="app.shutdown" subsystem="client" outcome="completed" pid=10656

@@ -67,3 +67,30 @@
 2026-07-04T00:52:08.510592Z  INFO herdr::server::headless: client connected client_id=4 cols=237 rows=59 cell_width_px=0 cell_height_px=0 render_encoding=SemanticFrame
 2026-07-04T00:52:27.116381Z  INFO herdr::server::headless: client detach requested via keybind client_id=4
 2026-07-04T00:52:27.124036Z  INFO herdr::server::headless: client disconnected client_id=4
+2026-07-04T04:50:14.662512Z  INFO herdr::api::server: api server listening path=/home/bfoster/.config/herdr/herdr.sock
+2026-07-04T04:50:14.667319Z  INFO herdr::logging: spawning pane terminal event="pane.spawn.start" subsystem="pane" outcome="started" pane_id=1 rows=24 cols=80 scrollback_limit_bytes=10000000
+2026-07-04T04:50:14.670387Z  INFO herdr::logging: pane child spawned event="pane.spawned" subsystem="pane" outcome="ok" pane_id=1 pid=10154
+2026-07-04T04:50:14.670974Z  INFO herdr::logging: spawning pane terminal event="pane.spawn.start" subsystem="pane" outcome="started" pane_id=2 rows=24 cols=80 scrollback_limit_bytes=10000000
+2026-07-04T04:50:14.672325Z  INFO herdr::logging: pane child spawned event="pane.spawned" subsystem="pane" outcome="ok" pane_id=2 pid=10157
+2026-07-04T04:50:14.672709Z  INFO herdr::logging: spawning pane terminal event="pane.spawn.start" subsystem="pane" outcome="started" pane_id=3 rows=24 cols=80 scrollback_limit_bytes=10000000
+2026-07-04T04:50:14.674472Z  INFO herdr::logging: pane child spawned event="pane.spawned" subsystem="pane" outcome="ok" pane_id=3 pid=10160
+2026-07-04T04:50:14.676050Z  INFO herdr::logging: session restore evaluated event="persist.restore" subsystem="persist" outcome="ok" workspaces=1
+2026-07-04T04:50:14.676086Z  INFO herdr::app: using pane scrollback configuration pane_scrollback_limit_bytes=10000000
+2026-07-04T04:50:14.750488Z  INFO herdr::server::headless: restored session already has workspaces; ignoring startup cwd cwd=/home/bfoster/config
+2026-07-04T04:50:14.750783Z  INFO herdr::server::headless: client protocol socket listening path=/home/bfoster/.config/herdr/herdr-client.sock
+2026-07-04T04:50:14.750973Z  INFO herdr::server::headless: herdr server started api_socket=/home/bfoster/.config/herdr/herdr.sock client_socket=/home/bfoster/.config/herdr/herdr-client.sock
+2026-07-04T04:50:14.751011Z  INFO herdr::logging: herdr starting event="app.startup" subsystem="server" outcome="started" pid=10148
+2026-07-04T04:50:14.751867Z  INFO herdr::logging: checking for updates event="update.check.start" subsystem="update" outcome="started"
+2026-07-04T04:50:14.983464Z  INFO herdr::server::headless: client connected client_id=2 cols=237 rows=59 cell_width_px=0 cell_height_px=0 render_encoding=SemanticFrame
+2026-07-04T04:50:15.113624Z  INFO herdr::logging: update available event="update.available" subsystem="update" outcome="ok" version="0.7.1"
+2026-07-04T04:50:15.113657Z  INFO herdr::update: new stable build available at https://github.com/ogulcancelik/herdr/releases/download/v0.7.1/herdr-linux-x86_64
+2026-07-04T04:50:15.113949Z  INFO herdr::update: auto-update check: 0.7.1 available, waiting for explicit install
+2026-07-04T04:50:22.794603Z  INFO herdr::logging: tab focused event="tab.focus" subsystem="tab" outcome="ok" workspace_id="w2" tab_id="w2:t1"
+2026-07-04T04:50:27.394472Z  INFO herdr::logging: tab focused event="tab.focus" subsystem="tab" outcome="ok" workspace_id="w2" tab_id="w2:t1"
+2026-07-04T04:50:31.605511Z  INFO herdr::logging: tab focused event="tab.focus" subsystem="tab" outcome="ok" workspace_id="w2" tab_id="w2:t1"
+2026-07-04T04:50:36.608449Z  INFO herdr::logging: session saved event="persist.save" subsystem="persist" outcome="ok" path=/home/bfoster/.config/herdr/session.json workspaces=1
+2026-07-04T04:50:44.369925Z  INFO herdr::server::headless: client detach requested via keybind client_id=2
+2026-07-04T04:50:44.377701Z  INFO herdr::server::headless: client disconnected client_id=2
+2026-07-04T04:50:55.936510Z  INFO herdr::server::headless: client connected client_id=4 cols=237 rows=59 cell_width_px=0 cell_height_px=0 render_encoding=SemanticFrame
+2026-07-04T04:51:01.055828Z  INFO herdr::server::headless: client detach requested via keybind client_id=4
+2026-07-04T04:51:01.070370Z  INFO herdr::server::headless: client disconnected client_id=4

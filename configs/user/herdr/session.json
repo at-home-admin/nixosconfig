@@ -40,18 +40,18 @@
             }
           },
           "panes": {
-            "2": {
-              "cwd": "/home/bfoster/Projects/Python/plectrum"
-            },
             "1": {
               "cwd": "/home/bfoster/Projects/Python/plectrum"
             },
             "3": {
               "cwd": "/home/bfoster/Projects/Python/plectrum"
+            },
+            "2": {
+              "cwd": "/home/bfoster/Projects/Python/plectrum"
             }
           },
           "zoomed": false,
-          "focused": 2,
+          "focused": 3,
           "root_pane": 1
         }
       ],
