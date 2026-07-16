@@ -135,7 +135,7 @@ in
       tea
       waybar
       rofi
-      #thunar
+      thunar
       wofi
       wpaperd
       nwg-look
