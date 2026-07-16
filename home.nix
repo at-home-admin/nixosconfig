@@ -181,6 +181,7 @@ in
       gns3-server
       ciscoPacketTracer9
       gcc
+      p7zip
     ])
 
     ++
