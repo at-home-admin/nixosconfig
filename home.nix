@@ -182,6 +182,7 @@ in
       ciscoPacketTracer9
       gcc
       p7zip
+      iperf3
     ])
 
     ++
