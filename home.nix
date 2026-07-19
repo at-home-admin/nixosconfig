@@ -183,7 +183,8 @@ in
       gcc
       p7zip
       iperf3
-      sqlite3
+      sqlite
+      sqlcipher
     ])
 
     ++
