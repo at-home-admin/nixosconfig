@@ -179,7 +179,7 @@ in
       ghgrab
       gns3-gui
       gns3-server
-      ciscoPacketTracer9
+      #ciscoPacketTracer9
       gcc
       p7zip
       iperf3
