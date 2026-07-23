@@ -39,6 +39,9 @@
   # Set your time zone.
   time.timeZone = "America/Edmonton";
 
+  virtualisation.virtualbox.host.enable = true;
+  users.extraGroups.vboxusers.members = [ "bfoster" ];
+
   # Select internationalisation properties.
   i18n.defaultLocale = "en_CA.UTF-8";
 
