@@ -185,6 +185,7 @@ in
       iperf3
       sqlite
       sqlcipher
+      uv
     ])
 
     ++
