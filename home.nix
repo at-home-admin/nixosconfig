@@ -187,6 +187,7 @@ in
       sqlite
       sqlcipher
       uv
+      python3Packages.debugpy
     ])
 
     ++
