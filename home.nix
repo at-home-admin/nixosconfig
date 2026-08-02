@@ -36,6 +36,7 @@ in
       };
       init.defaultBranch = "main";
       alias.adog = "log --all --decorate --oneline --graph";
+      pull.rebase = true;
     };
   };
 
