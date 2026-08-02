@@ -35,6 +35,7 @@ in
         email = "dev@athomeadmin.net";
       };
       init.defaultBranch = "main";
+      alias.adog = "log --all --decorate --oneline --graph";
     };
   };
 
