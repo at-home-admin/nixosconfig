@@ -310,6 +310,7 @@
         ];
       };
       script = ''
+        sleep 45
         /etc/profiles/per-user/bfoster/bin/gotify push -t "NixOS Update Succeeded" -p 10 \
           "The update completed successfully on $(cat /proc/sys/kernel/hostname) . It will run again Monday at or after 5 AM."
       '';
@@ -326,6 +327,7 @@
         ];
       };
       script = ''
+        sleep 45
         /etc/profiles/per-user/bfoster/bin/gotify push -t "NixOS Update Failed!" -p 10 \
           "Alert: System update failed on $(cat /proc/sys/kernel/hostname). Check 'journalctl -u %i' for details."
       '';
