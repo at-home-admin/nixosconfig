@@ -95,7 +95,11 @@
   boot.initrd.systemd.enable = true;
   # Enable the X11 windowing system.
   #  services.xserver.enable = true;
+  # Enable PostgreSQL service at startup
+  services.postgresql = {
+    enable = true;
 
+  };
   # Disable the XFCE Desktop Environment.
   services.xserver.displayManager.lightdm.enable = false;
   services.xserver.desktopManager.xfce.enable = false;
