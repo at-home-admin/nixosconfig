@@ -190,6 +190,7 @@ in
       sqlcipher
       uv
       python3Packages.debugpy
+      wf-recorder
     ])
 
     ++
