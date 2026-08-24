@@ -191,7 +191,7 @@ in
       uv
       python3Packages.debugpy
       wf-recorder
-      draw.io
+      drawio
     ])
 
     ++
