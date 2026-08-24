@@ -4,3 +4,4 @@
 /configs/user/herdr/herdr-server.log
 /configs/user/herdr/session.json
 /configs/user/herdr/plugins
+/configs/user/nvim/lazy-lock.json
