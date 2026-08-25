@@ -192,6 +192,8 @@ in
       python3Packages.debugpy
       wf-recorder
       drawio
+      claude-code
+      pi-coding-agent
     ])
 
     ++

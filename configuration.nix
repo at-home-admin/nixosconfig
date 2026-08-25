@@ -248,6 +248,7 @@
     zlib
     ov
   ];
+
   # Install and enable FiraCode Font
   fonts.packages = with pkgs; [
     nerd-fonts.fira-code

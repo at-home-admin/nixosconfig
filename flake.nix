@@ -10,6 +10,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
 
     };
+    claude-code.url = "github:sadjow/claude-code-nix";
   };
 
   outputs =
@@ -19,6 +20,7 @@
       home-manager,
       zen-browser,
       nixpkgs-unstable,
+      claude-code,
       ...
     }:
     let
@@ -30,6 +32,7 @@
         inherit system;
         config.allowUnfree = true;
       };
+
     in
     {
 
@@ -38,6 +41,7 @@
         specialArgs = {
           inherit inputs;
           inherit pkgs-unstable;
+
         };
         modules = [
           ./configuration.nix
@@ -53,6 +57,7 @@
               inherit inputs;
               inherit system;
               inherit pkgs-unstable;
+              inherit claude-code;
 
             };
           }
