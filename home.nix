@@ -195,6 +195,8 @@ in
       drawio
       claude-code
       pi-coding-agent
+      gping
+      rackpeek
     ])
 
     ++
