@@ -80,6 +80,7 @@ in
       uploglatest = "journalctl -u nixos-upgrade.service -e";
       clearuplog = "sudo journalctl -u nixos-upgrade.service --vacuum-time=2d";
       showgithistory = "git log -p";
+      screenwithaudio = "wf-recorder --audio"; # add --file=<nameofvideofile>.mkv or .mp4
     };
   };
 
