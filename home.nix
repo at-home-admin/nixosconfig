@@ -196,7 +196,6 @@ in
       claude-code
       pi-coding-agent
       gping
-      rackpeek
       openscad
     ])
 
