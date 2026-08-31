@@ -197,6 +197,7 @@ in
       pi-coding-agent
       gping
       rackpeek
+      openscad
     ])
 
     ++
