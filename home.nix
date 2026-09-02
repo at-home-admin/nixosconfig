@@ -198,7 +198,7 @@ in
       gping
       openscad
       luarocks
-      lua
+      lua5_1
     ])
 
     ++
