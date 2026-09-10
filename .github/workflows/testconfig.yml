@@ -1,19 +1,27 @@
-name: Configuration Test
+name: Test NixOS configuration
 
 on:
   push:
 
 jobs:
-  check:
+  nixos:
     runs-on: ubuntu-latest
+
     steps:
-      - uses: actions/checkout@v7
+      - name: Check out repository
+        uses: actions/checkout@v4
 
       - name: Install Nix
-        uses: DeterminateSystems/determinate-nix-action@v3
+        uses: DeterminateSystems/nix-installer-action@main
 
-      - name: Build Development Environment
-        run: sudo nixos-rebuild switch --flake github:at-home-admin/nixosconfig#EXILE --show-trace
+      - name: Enable Nix cache
+        uses: DeterminateSystems/magic-nix-cache-action@main
 
-      - name: Run Tests
-        run: nix -L flake check
+      - name: Check flake
+        run: nix flake check --show-trace
+
+      - name: Build EXILE
+        run: |
+          nix build \
+            '.#nixosConfigurations.EXILE.config.system.build.toplevel' \
+            --show-trace
