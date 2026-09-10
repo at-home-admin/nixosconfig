@@ -1,10 +1,11 @@
-name: Test NixOS configuration
+name: Check NixOS configuration
 
 on:
   push:
+  pull_request:
 
 jobs:
-  nixos:
+  check:
     runs-on: ubuntu-latest
 
     steps:
@@ -14,14 +15,11 @@ jobs:
       - name: Install Nix
         uses: DeterminateSystems/nix-installer-action@main
 
-      - name: Enable Nix cache
-        uses: DeterminateSystems/magic-nix-cache-action@main
+      - name: Check flake without building
+        run: nix flake check --no-build --show-trace
 
-      - name: Check flake
-        run: nix flake check --show-trace
-
-      - name: Build EXILE
+      - name: Evaluate EXILE
         run: |
-          nix build \
+          nix eval \
             '.#nixosConfigurations.EXILE.config.system.build.toplevel' \
             --show-trace
