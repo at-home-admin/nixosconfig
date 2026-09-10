@@ -1,0 +1,19 @@
+name: Configuration Test
+
+on:
+  push:
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+
+      - name: Install Nix
+        uses: DeterminateSystems/nix-installer-action@main
+
+      - name: Build Development Environment
+        run: nix-build
+
+      - name: Run Tests
+        run: nix -L flake check
