@@ -100,12 +100,12 @@ in
   };
   programs.zsh.initContent = ''
 
+    source ~/.local/share/leaf/completions/leaf.zsh
     fastfetch
     export YAZI_CONFIG_HOME="$HOME/config/configs/user/yazi"
     export PATH="$HOME/.config/emacs/bin:$PATH"
     export XDG_CACHE_HOME="$HOME/.cache"
     export PATH="/home/bfoster/.local/bin:$PATH"
-
   '';
   # The home.packages option allows you to install Nix packages into your
   # environment.
