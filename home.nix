@@ -106,6 +106,7 @@ in
     export PATH="$HOME/.config/emacs/bin:$PATH"
     export XDG_CACHE_HOME="$HOME/.cache"
     export PATH="/home/bfoster/.local/bin:$PATH"
+    export PATH="/home/bfoster/.cargo/bin:$PATH"
   '';
   # The home.packages option allows you to install Nix packages into your
   # environment.
