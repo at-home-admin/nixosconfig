@@ -1,68 +1,15 @@
 {
-  description = "Desktop Nix Configuration";
-  inputs = {
-    nixpkgs.url = "nixpkgs/nixos-26.05";
-    zen-browser.url = "github:youwen5/zen-browser-flake";
-    zen-browser.inputs.nixpkgs.follows = "nixpkgs";
-    nixpkgs-unstable.url = "nixpkgs/nixos-unstable";
-    home-manager = {
-      url = "github:nix-community/home-manager/release-26.05";
-      inputs.nixpkgs.follows = "nixpkgs";
+  description = "A very basic flake";
 
-    };
-    claude-code.url = "github:sadjow/claude-code-nix";
+  inputs = {
+    nixpkgs.url = "https://channels.nixos.org/nixpkgs-unstable/nixexprs.tar.zst";
   };
 
-  outputs =
-    inputs@{
-      self,
-      nixpkgs,
-      home-manager,
-      zen-browser,
-      nixpkgs-unstable,
-      claude-code,
-      ...
-    }:
-    let
-      vars = import ./variables.nix;
-      system = "x86_64-linux";
-      lib = nixpkgs.lib;
-      pkgs = nixpkgs.legacyPackages.${system};
-      pkgs-unstable = import nixpkgs-unstable {
-        inherit system;
-        config.allowUnfree = true;
-      };
+  outputs = inputs: {
+    packages = builtins.mapAttrs (system: pkgs: {
+      hello = pkgs.hello;
 
-    in
-    {
-
-      nixosConfigurations."EXILE" = nixpkgs.lib.nixosSystem {
-        inherit system;
-        specialArgs = {
-          inherit inputs;
-          inherit pkgs-unstable;
-
-        };
-        modules = [
-          ./configuration.nix
-          home-manager.nixosModules.home-manager
-          {
-            home-manager = {
-              useGlobalPkgs = true;
-              useUserPackages = true;
-              users.bfoster = import ./home.nix;
-              backupFileExtension = "backup";
-            };
-            home-manager.extraSpecialArgs = {
-              inherit inputs;
-              inherit system;
-              inherit pkgs-unstable;
-              inherit claude-code;
-
-            };
-          }
-
-        ];
-      };
-    };
+      default = inputs.self.packages.${system}.hello;
+    }) inputs.nixpkgs.legacyPackages;
+  };
 }
