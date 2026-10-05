@@ -200,6 +200,9 @@ in
       openscad
       luarocks
       lua5_1
+      rustc
+      cargo
+      rustfmt
     ])
 
     ++
