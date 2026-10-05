@@ -203,6 +203,7 @@ in
       rustc
       cargo
       rustfmt
+      rust-analyzer
     ])
 
     ++
