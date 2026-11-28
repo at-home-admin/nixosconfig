@@ -9,7 +9,7 @@
     "modules-center": ["custom/clock"],
     "modules-right": [ "battery", "wireplumber", "backlight", "network", "bluetooth", "hyprland/language", "tray"],
     "custom/clock": {
-      "exec": "date '+%d.%m.%Y | %H:%M'",
+      "exec": "date '{:%d.%m.%Y | %H:%M %Z %z}'",
       "interval": 1
 },
     
