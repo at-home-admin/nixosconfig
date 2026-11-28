@@ -8,6 +8,11 @@
     "modules-left": ["hyprland/workspaces", "group/usage"],
     "modules-center": ["clock"],
     "modules-right": [ "battery", "wireplumber", "backlight", "network", "bluetooth", "hyprland/language", "tray"],
+    "clock": {
+      "timezone": "America/Edmonton",
+      "format": "{:%d.%m.%Y | %H:%M}"
+},
+    
     "custom/pacman": {
       "format": "{icon}{0}",
       "return-type": "json",
@@ -65,9 +70,7 @@
         }
     },
 
-    "clock": {
-        "format": "{:%d.%m.%Y | %H:%M}"
-    },
+  
 
 
 "pulseaudio": {
