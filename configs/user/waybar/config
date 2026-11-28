@@ -6,11 +6,11 @@
     "spacing": 5,
 
     "modules-left": ["hyprland/workspaces", "group/usage"],
-    "modules-center": ["clock"],
+    "modules-center": ["custom/clock"],
     "modules-right": [ "battery", "wireplumber", "backlight", "network", "bluetooth", "hyprland/language", "tray"],
-    "clock": {
-      "timezone": "America/Edmonton",
-      "format": "{:%d.%m.%Y | %H:%M %Z %z}"
+    "custom/clock": {
+      "exec": "date '+%d.%m.%Y | %H:%M'",
+      "interval": 1
 },
     
     "custom/pacman": {
