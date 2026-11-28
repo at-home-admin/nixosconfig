@@ -10,7 +10,7 @@
     "modules-right": [ "battery", "wireplumber", "backlight", "network", "bluetooth", "hyprland/language", "tray"],
     "clock": {
       "timezone": "America/Edmonton",
-      "format": "{:%d.%m.%Y | %H:%M}"
+      "format": "{:%d.%m.%Y | %H:%M %Z %z}"
 },
     
     "custom/pacman": {
